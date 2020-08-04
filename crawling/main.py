@@ -1,15 +1,15 @@
 import requests
 import pandas as pd
 import urllib.robotparser
+from recommendations import *
 
 # Teste de importação de modulos
-from crawling.recommendations import *
+rc1 = Recommendation01('um')
+#rc1.print_name()
 
-rec1 = Recommendation01('UMMMMMMM')
-rec1.print_name()
 
-rec2 = Recommendation02('DOISSSSSSS')
-rec2.print_name()
+#rec2 = Recommendation02('DOISSSSSSS')
+#rec2.print_name()
 
 
 # Faz leitura do arquivo CSV e converte para dict
@@ -58,6 +58,7 @@ for city in cities:
 
         if sourcecode.status_code == 200:
             cities[city]['sourcecode'] = sourcecode.content
+            rc1.Avaliacao(cities[city]['sourcecode'])
 
+#print(cities[0]['sourcecode'])
 
-print(cities[0]['sourcecode'])
