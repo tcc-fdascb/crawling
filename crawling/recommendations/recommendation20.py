@@ -1,17 +1,15 @@
 from bs4 import BeautifulSoup
-class Recommendation01:
+
+
+class Recommendation20:
     """
-    Recomendação 1:Fornecer alternativa em texto para as imagens do sítio 
+    Recomendação 20:Fornecer alternativa em texto para as imagens do sítio 
     Descrição da recomendação se houver
 
-    :param name - Recebe o nome da Recomendação
     """
 
-    def __init__(self, name):
-        self.name = name
-
-    def print_name(self):
-        print(self.name)
+    def __init__(self):
+        pass
 
     def Avaliacao(self, contents):
         #self.contents = contents
@@ -24,4 +22,5 @@ class Recommendation01:
                  print('Erro 2 :'+str(imagem)+'| Não possui o atributo "Alt"' )
             elif not imagem['alt'] :
                 print('Erro 1 :'+str(imagem)+'| Não possui valor no atributo "Alt"' )     
-        #print(imagens)           
+        #print(imagens)    
+               
