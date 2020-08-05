@@ -1,4 +1,4 @@
-class Recommendation02:
+class RecommendationModelo:
     """
     Recomendação 2: Nome da recomendação
     Descrição da recomendação se houver
