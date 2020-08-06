@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import urllib.robotparser
-from recommendations import *
+from crawling.recommendations import *
 
 
 # Faz leitura do arquivo CSV e converte para dict
@@ -50,7 +50,8 @@ for city in cities:
 
         if sourcecode.status_code == 200:
             cities[city]['sourcecode'] = sourcecode.content
-            Recommendation20.Avaliacao(cities[city]['sourcecode'])
+            Recommendation20(cities[city]['sourcecode']).avaliacao()
 
-#print(cities[0]['sourcecode'])
 
+# print('__CITIES__')
+# print(cities)
