@@ -1,7 +1,13 @@
 import requests
 import pandas as pd
 import urllib.robotparser
+
 from crawling.recommendations import *
+from crawling.occurrences import Occurrences
+
+
+# Inicializa uma estância para lista de ocorrências
+occurrences = Occurrences()
 
 
 # Faz leitura do arquivo CSV e converte para dict
@@ -50,8 +56,10 @@ for city in cities:
 
         if sourcecode.status_code == 200:
             cities[city]['sourcecode'] = sourcecode.content
-            Recommendation20(cities[city]['sourcecode']).avaliacao()
+
+            rec20 = Recommendation20(cities[city]['sourcecode']).avaliacao()
+            occurrences.add({'rec20': rec20})
 
 
-# print('__CITIES__')
-# print(cities)
+# Exibe ocorrências
+occurrences.show()
