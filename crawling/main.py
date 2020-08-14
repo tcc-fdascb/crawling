@@ -11,7 +11,7 @@ occurrences = Occurrences()
 
 
 # Faz leitura do arquivo CSV e converte para dict
-cities = pd.read_csv('crawling/data/cities-sa.csv')
+cities = pd.read_csv('data/cities-sa.csv')
 cities = cities.to_dict(orient='index')
 print(cities)
 
@@ -58,6 +58,7 @@ for city in cities:
             cities[city]['sourcecode'] = sourcecode.content
 
             rec20 = Recommendation20(cities[city]['sourcecode']).avaliacao()
+            rec01 = Recommendation01(cities[city]['url']).validarhtml()
             occurrences.add({'rec20': rec20})
 
 
