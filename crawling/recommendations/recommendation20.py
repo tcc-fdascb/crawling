@@ -11,8 +11,9 @@ class Recommendation20:
     """
 
     def __init__(self, sourcecode):
-        self.sourcecode = sourcecode
+        self.rec = 20
         self.occurrences = Occurrences()
+        self.sourcecode = sourcecode
 
     def avaliacao(self):
         soap = BeautifulSoup(self.sourcecode, 'html.parser')
@@ -20,10 +21,10 @@ class Recommendation20:
 
         for imagem in imagens:
             if not imagem.has_attr('alt'):
-                self.occurrences.add(OccurrenceInterface(2, 'Não possui o atributo "alt"', imagem))
+                self.occurrences.add(OccurrenceInterface(self.rec, 0, 0, imagem))
             elif not imagem['alt']:
-                self.occurrences.add(OccurrenceInterface(1, 'Não possui valor no atributo "alt"', imagem))
+                self.occurrences.add(OccurrenceInterface(self.rec, 0, 1, imagem))
             else:
-                self.occurrences.add(OccurrenceInterface(0, 'Possui valor no atributo "alt"', imagem))
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, 2, imagem))
 
         return self.occurrences.list_of_occurrences

@@ -58,7 +58,7 @@ for city in cities:
             cities[city]['sourcecode'] = sourcecode.content
 
             rec20 = Recommendation20(cities[city]['sourcecode']).avaliacao()
-            rec01 = Recommendation01(cities[city]['url']).validarhtml()
+            # rec01 = Recommendation01(cities[city]['url']).validarhtml()
             occurrences.add({'rec20': rec20})
 
 
