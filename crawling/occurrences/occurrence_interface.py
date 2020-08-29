@@ -12,8 +12,3 @@ class OccurrenceInterface:
         self.code_feedback = code_feedback
         self.code_message = code_message
         self.tag = tag
-
-    # def __init__(self, code, message, tag):
-    #     self.code = code
-    #     self.message = message
-    #     self.tag = tag
