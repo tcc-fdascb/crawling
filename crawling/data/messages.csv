@@ -1,5 +1,5 @@
-recommendation,code_feedback,code_message,message
-20,0,0,Imagem não possui o atributo "alt".
-20,0,1,Imagem Não possui texto alternativo definido no atributo "alt".
-20,1,2,Imagem passou por todos os nossos testes.
-20,2,3,Xyz.
+"recommendation","code_feedback","code_message","message"
+20,0,0,"Imagem não possui o atributo ""alt""."
+20,0,1,"Imagem não possui texto alternativo definido no atributo ""alt""."
+20,1,2,"Imagem passou por todos os nossos testes."
+20,2,3,"Xyz."
