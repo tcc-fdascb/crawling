@@ -7,7 +7,13 @@ from ..occurrences.occurrence_interface import OccurrenceInterface
 class Recommendation20:
     """
     Recomendação 20: Fornecer alternativa em texto para as imagens do sítio
-    Descrição da recomendação se houver
+
+    Verificações:
+        - Imagens com conteúdo sem descrição
+        - Imagens com descrição inadequada
+        - Imagens diferentes com a mesma descrição
+        - Imagem com dupla descrição, title e alt iguais
+        - Imagens com descrições longas no alt
     """
 
     def __init__(self, sourcecode):
@@ -18,13 +24,10 @@ class Recommendation20:
     def avaliacao(self):
         soap = BeautifulSoup(self.sourcecode, 'html.parser')
         imagens = soap.find_all('img')
-
         for imagem in imagens:
-            if not imagem.has_attr('alt'):
-                self.occurrences.add(OccurrenceInterface(self.rec, 0, 0, imagem))
-            elif not imagem['alt']:
-                self.occurrences.add(OccurrenceInterface(self.rec, 0, 1, imagem))
+            if not imagem.has_attr('alt') or not imagem['alt']:
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, 1, imagem))
             else:
-                self.occurrences.add(OccurrenceInterface(self.rec, 1, 2, imagem))
+                self.occurrences.add(OccurrenceInterface(self.rec, 0, 0, imagem))
 
         return self.occurrences.list_of_occurrences

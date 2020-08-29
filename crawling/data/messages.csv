@@ -1,5 +1,13 @@
-"recommendation","code_feedback","code_message","message"
-20,0,0,"Imagem não possui o atributo ""alt""."
-20,0,1,"Imagem não possui texto alternativo definido no atributo ""alt""."
-20,1,2,"Imagem passou por todos os nossos testes."
-20,2,3,"Xyz."
+recommendation,type_feedback,code_message,message
+7,0,0,Passou por todos os nossos testes.
+7,1,1,Foram usadas elementos table para leiautar a página.
+7,1,2,Há elementos form dentro de elementos table.
+8,0,0,Passou por todos os nossos testes.
+8,1,1,Há links adjacentes sem nenhum tipo de separação.
+8,1,2,Há links adjacentes separados por símbolos.
+20,0,0,Passou por todos os nossos testes.
+20,1,1,Imagem sem atributo alt ou alt vazio.
+20,1,2,Imagem com descrição inadequada.
+20,2,4,Há outras imagens com a mesma descrição.
+20,2,6,"Imagem com dupla descrição, title e alt iguais."
+20,2,7,Imagem com descrição longa no alt.
