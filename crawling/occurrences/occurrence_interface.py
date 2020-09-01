@@ -7,8 +7,7 @@ class OccurrenceInterface:
     @param: code_message - código da mensagem
     """
 
-    def __init__(self, recommendation, feedback_type, code_message, tag):
+    def __init__(self, recommendation, code_message, tag):
         self.recommendation = recommendation
-        self.feedback_type = feedback_type
         self.code_message = code_message
         self.tag = tag
