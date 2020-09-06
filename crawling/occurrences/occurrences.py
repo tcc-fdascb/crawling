@@ -1,12 +1,12 @@
 import pandas as pd
 
 
-def translate_message(messages, recommendation, feedback_type, code_message):
+def translate_message(messages, recommendation, code_message):
     code = ['OK', 'ERRO', 'ALERTA']
 
     for message in messages:
         if messages[message]['recommendation'] == recommendation and messages[message]['code_message'] == code_message:
-            return code[feedback_type] + ': ' + messages[message]['message']
+            return code[messages[message]['type_feedback']] + ': ' + messages[message]['message']
 
 
 class Occurrences:
@@ -29,8 +29,6 @@ class Occurrences:
                 print(key)
                 for value in occurrence.get(key):
                     print(value.recommendation,
-                          value.feedback_type,
                           value.code_message,
-                          translate_message(messages, value.recommendation, value.feedback_type, value.code_message),
-                          value.tag
-                          )
+                          translate_message(messages, value.recommendation, value.code_message),
+                          value.tag)

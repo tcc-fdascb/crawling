@@ -26,8 +26,8 @@ class Recommendation20:
         imagens = soap.find_all('img')
         for imagem in imagens:
             if not imagem.has_attr('alt') or not imagem['alt']:
-                self.occurrences.add(OccurrenceInterface(self.rec, 1, 1, imagem))
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, imagem))
             else:
-                self.occurrences.add(OccurrenceInterface(self.rec, 0, 0, imagem))
+                self.occurrences.add(OccurrenceInterface(self.rec, 0, imagem))
 
         return self.occurrences.list_of_occurrences
