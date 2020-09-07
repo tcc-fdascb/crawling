@@ -10,6 +10,8 @@ from crawling.occurrences import Occurrences
 # Define o arquivo de entrada
 from crawling.recommendations.RecommendationEmag19 import  RecommendationEmag19
 from crawling.recommendations.RecommendationEmag31 import RecommendationEmag31
+from crawling.recommendations.RecommendationEmag39 import RecommendationEmag39
+from crawling.recommendations.RecommendationEmag51 import RecommendationEmag51
 from crawling.recommendations.RecommendationEmag61 import  RecommendationEmag61
 
 CSV_FILE = 'data/cities-abc.csv'
@@ -115,6 +117,10 @@ class ValidateCity(Thread):
             occurrences.add({self.city['_id']: recemag61})
             recemag31 = RecommendationEmag31(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: recemag31})
+            recemag39 = RecommendationEmag39(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: recemag39})
+            recemag51 = RecommendationEmag51(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: recemag51})
             rec20 = Recommendation20(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: rec20})
 

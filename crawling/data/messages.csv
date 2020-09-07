@@ -1,10 +1,4 @@
 recommendation,type_feedback,code_message,message
-31,0,0,Pagina em PT-BR.
-31,1,1,Pagina em outro idioma
-19,0,0,Passou por todos os nossos testes.
-19,1,1,Pode abrir Novas Instâncias
-61,0,0,Passou por todos os nossos testes.
-61,1,1,Botão sem descrição.
 7,0,0,Passou por todos os nossos testes.
 7,1,1,Foram usadas elementos table para leiautar a página.
 7,1,2,Há elementos form dentro de elementos table.
@@ -17,3 +11,12 @@ recommendation,type_feedback,code_message,message
 20,2,4,Há outras imagens com a mesma descrição.
 20,2,6,"Imagem com dupla descrição, title e alt iguais."
 20,2,7,Imagem com descrição longa no alt.
+31,0,0,Pagina em PT-BR.
+31,1,1,Pagina em outro idioma
+19,0,0,Passou por todos os nossos testes.
+19,1,1,Pode abrir Novas Instâncias
+61,0,0,Passou por todos os nossos testes.
+61,1,1,Botão sem descrição.
+39,0,0,Tabela com descrição.
+39,1,1,Tabela sem descrição.
+51,2,0,Atenção possui presença de vídeo.
