@@ -29,11 +29,11 @@ class Recommendation38:
                      # erro
              if inputverifica['type'] == 'reset':
                  if inputverifica['value'] == '':
-
+                    # erro
              if inputverifica['type'] == 'button':
                  if inputverifica['value'] == '':
-
+                    # erro
              if inputverifica['type'] == 'submit':
                  if inputverifica['value'] == '':
-
+                    # erro
         

@@ -10,7 +10,7 @@ class Recommendation07:
     """
 
     def __init__(self, sourcecode):
-        self.rec = 07
+        self.rec = 7
         self.sourcecode = sourcecode
         self.occurrences = Occurrences()
 
@@ -22,11 +22,12 @@ class Recommendation07:
         for removeitem in remove: #remove o código html comentado
             removeitem.extract()
 
-        tables = remove.select('table')
+        tables = soap.select('table')
 
         for tableitem in tables:
             if ["colspan","border","cellpadding","frame"] in tableitem.attrs:
-                self.occurrences.add(OccurrenceInterface(self.rec, 1, 1, tableitem))
-            if verificaformulario in remove.select('tr > input'):
-
-            if verificaformulario in remove.select('th > input'):
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, tableitem))
+            if verificaformulario in remove.select('table > form'):
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, tableitem))
+            # if verificaformulario in remove.select('th > input'):
+            #     self.occurrences.add(OccurrenceInterface(self.rec, 1, tableitem))

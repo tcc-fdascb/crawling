@@ -30,4 +30,7 @@ class Recommendation20:
             else:
                 self.occurrences.add(OccurrenceInterface(self.rec, 0, imagem))
 
+            if len(imagem['alt']) > 100:
+                self.occurrences.add(OccurrenceInterface(self.rec, 2, imagem))
+
         return self.occurrences.list_of_occurrences
