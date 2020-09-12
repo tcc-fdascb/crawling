@@ -22,12 +22,16 @@ class Recommendation07:
         for removeitem in remove: #remove o código html comentado
             removeitem.extract()
 
-        tables = soap.select('table')
+        # tables = soap.select('table form')
 
-        for tableitem in tables:
-            if ["colspan","border","cellpadding","frame"] in tableitem.attrs:
+        for tableitem in soap.select('table form'):
+            if tableitem:
                 self.occurrences.add(OccurrenceInterface(self.rec, 1, tableitem))
-            if verificaformulario in remove.select('table > form'):
-                self.occurrences.add(OccurrenceInterface(self.rec, 1, tableitem))
-            # if verificaformulario in remove.select('th > input'):
-            #     self.occurrences.add(OccurrenceInterface(self.rec, 1, tableitem))
+
+
+        for verifica in ['topo', 'main', 'rodape', 'principal', 'menu', 'nav', 'navigation', 'navegacao', 'header', 'footer']:
+            selectionclass = 'table .' + verifica
+            selectionids   = 'table #'+ verifica
+
+            if soap.select(selectionclass ) or soap.select(selectionids):
+                # erro

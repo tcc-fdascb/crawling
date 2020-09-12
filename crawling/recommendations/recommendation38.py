@@ -24,16 +24,17 @@ class Recommendation38:
         soapfiltro = BeautifulSoup(soap.prettify(), 'html.parser')
 
         for inputverifica in soapfiltro.select('input'):
+
              if inputverifica['type'] == 'image':
-                 if inputverifica['alt'] == '':
+                 if not inputverifica['alt']:
                      # erro
              if inputverifica['type'] == 'reset':
-                 if inputverifica['value'] == '':
+                 if not inputverifica['value']:
                     # erro
              if inputverifica['type'] == 'button':
-                 if inputverifica['value'] == '':
+                 if not inputverifica['value']:
                     # erro
              if inputverifica['type'] == 'submit':
-                 if inputverifica['value'] == '':
+                 if not inputverifica['value']:
                     # erro
         
