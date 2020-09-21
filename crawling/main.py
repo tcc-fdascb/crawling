@@ -7,13 +7,13 @@ from datetime import datetime as dt
 from crawling.recommendations import *
 from crawling.occurrences import Occurrences
 
-# Define o arquivo de entrada
 from crawling.recommendations.RecommendationEmag19 import  RecommendationEmag19
 from crawling.recommendations.RecommendationEmag31 import RecommendationEmag31
 from crawling.recommendations.RecommendationEmag39 import RecommendationEmag39
 from crawling.recommendations.RecommendationEmag51 import RecommendationEmag51
 from crawling.recommendations.RecommendationEmag61 import  RecommendationEmag61
 
+# Define o arquivo de entrada
 CSV_FILE = 'data/cities-abc.csv'
 
 # Inicializa uma estância para lista de ocorrências
@@ -24,14 +24,9 @@ def csv_file_to_dict(file):
     try:
         data = pd.read_csv(file)
         data = data.to_dict(orient='index')
-
         return data
-
     except Exception:
         raise
-
-
-
 
 
 class ValidateCity(Thread):
@@ -108,6 +103,7 @@ class ValidateCity(Thread):
         A partir do código fonte da página inicial do sítio eletrônico, valida as
         recomendações listadas e guarda suas ocorrências na lista de ocorrências.
         """
+
         if self.sourcecode:
             rec01_html = Recommendation01(self.sourcecode, url=self.city['url']).validar_css()
             occurrences.add({self.city['_id']: rec01_html})
