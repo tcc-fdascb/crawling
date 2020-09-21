@@ -39,7 +39,7 @@ class Recommendation01:
                 href = self.url + href
 
             if re.search('(app|main|styles?|global|estilos?|default).css', href) is not None \
-               and re.search('plugins?|libs?|bootstrap|materialize', href) is None:
+               and re.search('plugins?|libs?|portlet|bootstrap|materialize', href) is None:
                 url = Template(WEBSERVICE_CSS).substitute(url=encode_url(href))
                 analizer = requests.get(url)
 
