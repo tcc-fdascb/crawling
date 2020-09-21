@@ -109,8 +109,12 @@ class ValidateCity(Thread):
         recomendações listadas e guarda suas ocorrências na lista de ocorrências.
         """
         if self.sourcecode:
-            # rec01 = Recommendation01(city['url']).validarhtml()
-            # occurrences.add({'rec01': rec01})
+            rec01_html = Recommendation01(self.sourcecode, url=self.city['url']).validar_css()
+            occurrences.add({self.city['_id']: rec01_html})
+
+            rec01_css = Recommendation01(self.sourcecode, url=self.city['url']).validar_html()
+            occurrences.add({self.city['_id']: rec01_css})
+
             recemag19 = RecommendationEmag19(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: recemag19})
             recemag61 = RecommendationEmag61(self.sourcecode).avaliacao()
