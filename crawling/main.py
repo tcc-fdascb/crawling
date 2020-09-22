@@ -14,7 +14,7 @@ from crawling.recommendations.RecommendationEmag39 import RecommendationEmag39
 from crawling.recommendations.RecommendationEmag51 import RecommendationEmag51
 from crawling.recommendations.RecommendationEmag61 import  RecommendationEmag61
 
-CSV_FILE = 'data/cities-abc.csv'
+CSV_FILE = 'data/teste.csv'
 
 # Inicializa uma estância para lista de ocorrências
 occurrences = Occurrences()
@@ -78,27 +78,27 @@ class ValidateCity(Thread):
         """
 
         try:
-            self.city['has_robotstxt'] = False
-            self.city['can_crawling'] = False
-
-            city_url = self.city['url']
-            city_url_robots = city_url + 'robots.txt'
-
-            robotstxt = requests.get(city_url_robots, timeout=30)
-
-            if robotstxt.status_code == 404:
-                self.city['can_crawling'] = False
-
-            if robotstxt.status_code == 200:
-                self.city['has_robotstxt'] = True
-
-                robotparser = urllib.robotparser.RobotFileParser()
-                robotparser.set_url(city_url_robots)
-                robotparser.read()
-
-                if robotparser.can_fetch('*', city_url):
-                    self.city['can_crawling'] = True
-                    self.validate_recommendations()
+            # self.city['has_robotstxt'] = False
+            # self.city['can_crawling'] = False
+            #
+            # city_url = self.city['url']
+            # city_url_robots = city_url + 'robots.txt'
+            #
+            # robotstxt = requests.get(city_url_robots, timeout=30)
+            #
+            # # if robotstxt.status_code == 404:
+            #     self.city['can_crawling'] = False
+            #
+            # # if robotstxt.status_code == 200:
+            #     self.city['has_robotstxt'] = True
+            #
+            #     robotparser = urllib.robotparser.RobotFileParser()
+            #     robotparser.set_url(city_url_robots)
+            #     robotparser.read()
+            #
+            #     if robotparser.can_fetch('*', city_url):
+            self.city['can_crawling'] = True
+            self.validate_recommendations()
 
         except requests.exceptions.RequestException as error:
             print(dt.timestamp(dt.now()), self.city['city_name'], error)
@@ -111,18 +111,19 @@ class ValidateCity(Thread):
         if self.sourcecode:
             # rec01 = Recommendation01(city['url']).validarhtml()
             # occurrences.add({'rec01': rec01})
-            recemag19 = RecommendationEmag19(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: recemag19})
-            recemag61 = RecommendationEmag61(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: recemag61})
-            recemag31 = RecommendationEmag31(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: recemag31})
-            recemag39 = RecommendationEmag39(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: recemag39})
-            recemag51 = RecommendationEmag51(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: recemag51})
-            rec20 = Recommendation20(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec20})
+            # recemag19 = RecommendationEmag19(self.sourcecode).avaliacao()
+            # occurrences.add({self.city['_id']: recemag19})
+            # recemag61 = RecommendationEmag61(self.sourcecode).avaliacao()
+            # occurrences.add({self.city['_id']: recemag61})
+            # recemag31 = RecommendationEmag31(self.sourcecode).avaliacao()
+            # occurrences.add({self.city['_id']: recemag31})
+            # recemag39 = RecommendationEmag39(self.sourcecode).avaliacao()
+            # occurrences.add({self.city['_id']: recemag39})
+            # recemag51 = RecommendationEmag51(self.sourcecode).avaliacao()
+            # occurrences.add({self.city['_id']: recemag51})
+            # rec20 = Recommendation20(self.sourcecode).avaliacao()
+            rec08 = Recommendation08(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: rec08})
 
 
 cities = csv_file_to_dict(CSV_FILE)

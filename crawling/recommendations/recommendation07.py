@@ -32,6 +32,5 @@ class Recommendation07:
         for verifica in ['topo', 'main', 'rodape', 'principal', 'menu', 'nav', 'navigation', 'navegacao', 'header', 'footer']:
             selectionclass = 'table .' + verifica
             selectionids   = 'table #'+ verifica
-
             if soap.select(selectionclass ) or soap.select(selectionids):
-                # erro
+                pass
