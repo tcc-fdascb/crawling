@@ -27,14 +27,14 @@ class Recommendation38:
 
              if inputverifica['type'] == 'image':
                  if not inputverifica['alt']:
-                     # erro
+                     pass# erro
              if inputverifica['type'] == 'reset':
                  if not inputverifica['value']:
-                    # erro
+                    pass# erro
              if inputverifica['type'] == 'button':
                  if not inputverifica['value']:
-                    # erro
+                    pass# erro
              if inputverifica['type'] == 'submit':
                  if not inputverifica['value']:
-                    # erro
+                    pass # erro
         
