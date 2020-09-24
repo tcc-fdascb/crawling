@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import itertools
+
 from ..occurrences.occurrences import Occurrences
 from ..occurrences.occurrence_interface import OccurrenceInterface
 
@@ -41,11 +42,9 @@ class Recommendation20:
             if imagem['alt'] == imagem['title']:
                 self.occurrences.add(OccurrenceInterface(self.rec, 0, imagem))
 
-
-        for compara1,compara2 in itertools.combinations(imagens,2):
-
+        for compara1, compara2 in itertools.combinations(imagens, 2):
             if compara1['alt'] == compara2['alt'] and compara1['src'] != compara2['src']:
-                self.occurrences.add(OccurrenceInterface(self.rec, 2, imagem))
-
+                # self.occurrences.add(OccurrenceInterface(self.rec, 2, imagem))
+                pass
 
         return self.occurrences.list_of_occurrences
