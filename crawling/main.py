@@ -74,15 +74,12 @@ class ValidateCity(Thread):
 
         try:
             self.city['has_robotstxt'] = False
-            self.city['can_crawling'] = False
+            self.city['can_crawling'] = True
 
             city_url = self.city['url']
             city_url_robots = city_url + 'robots.txt'
 
             robotstxt = requests.get(city_url_robots, timeout=30)
-
-            if robotstxt.status_code == 404:
-                self.city['can_crawling'] = False
 
             if robotstxt.status_code == 200:
                 self.city['has_robotstxt'] = True
@@ -93,7 +90,9 @@ class ValidateCity(Thread):
 
                 if robotparser.can_fetch('*', city_url):
                     self.city['can_crawling'] = True
-                    self.validate_recommendations()
+
+            if self.city['can_crawling']:
+                self.validate_recommendations()
 
         except requests.exceptions.RequestException as error:
             print(dt.timestamp(dt.now()), self.city['city_name'], error)
