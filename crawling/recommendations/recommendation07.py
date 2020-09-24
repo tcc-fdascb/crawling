@@ -23,6 +23,8 @@ class Recommendation07:
             removeitem.extract()
 
         # tables = soap.select('table form')
+        if len(soap.find_all('body > iframe')) > 0 and len(soap.find_all('body > div')) == 0 and len(soap.find_all('body > main')) == 0:
+            pass # dispara um warning dizendo algo como: "Possivelmente o conteúdo da página está em outro endereço."
 
         for tableitem in soap.select('table form'):
             if tableitem:
