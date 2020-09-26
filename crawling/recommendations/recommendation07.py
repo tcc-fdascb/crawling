@@ -23,15 +23,27 @@ class Recommendation07:
         # tables = soap.select('table form')
         if len(soap.find_all('body > iframe')) > 0 and len(soap.find_all('body > div')) == 0 and len(
                 soap.find_all('body > main')) == 0:
-            pass  # dispara um warning dizendo algo como: "Possivelmente o conteúdo da página está em outro endereço."
+            # dispara um warning dizendo algo como: "Possivelmente o conteúdo da página está em outro endereço."
+            ispassou = False
+            self.occurrences.add(OccurrenceInterface(self.rec, 3,""))
 
         for tableitem in soap.select('table form'):
             if tableitem:
-                self.occurrences.add(OccurrenceInterface(self.rec, 1, tableitem))
+                self.occurrences.add(OccurrenceInterface(self.rec, 2, tableitem))
+                ispassou = False
 
         for verifica in ['topo', 'main', 'rodape', 'principal', 'menu', 'nav', 'navigation', 'navegacao', 'header',
                          'footer']:
             selectionclass = 'table .' + verifica
             selectionids = 'table #' + verifica
-            if soap.select(selectionclass) or soap.select(selectionids):
-                pass
+            if soap.select(selectionclass):
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, soap.select(selectionclass)))
+                ispassou = False
+            if soap.select(selectionids):
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, soap.select(selectionids)))
+                ispassou = False
+
+        if ispassou:
+            self.occurrences.add(OccurrenceInterface(self.rec, 0,""))
+
+        return self.occurrences.list_of_occurrences
