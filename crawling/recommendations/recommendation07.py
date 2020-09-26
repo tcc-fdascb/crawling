@@ -17,6 +17,7 @@ class Recommendation07:
     def avaliacao(self):
         soap = BeautifulSoup(self.sourcecode, 'html.parser')
         remove = soap.find_all(text=lambda text: isinstance(text, Comment))
+        ispassou = True
         for removeitem in remove:  # remove o código html comentado
             removeitem.extract()
 
