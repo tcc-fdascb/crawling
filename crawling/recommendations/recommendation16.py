@@ -4,7 +4,7 @@ from ..occurrences.occurrences import Occurrences
 from ..occurrences.occurrence_interface import OccurrenceInterface
 
 
-class RecommendationEmag31:
+class recommendation16:
     """
     Recomendação 3.1 – Identificar o idioma principal da página
     """
@@ -16,15 +16,14 @@ class RecommendationEmag31:
 
     def avaliacao(self):
         soap = BeautifulSoup(self.sourcecode, 'html.parser')
-        html = soap.decode('utf-8')
-        lang = html.split()
+        lang = soap.find("html").get('lang')
 
-
-
-        if'lang="pt-br"'in lang:
-            pos = lang.index('lang="pt-br"')
-            out = lang[pos]
-            self.occurrences.add(OccurrenceInterface(self.rec, 0, out))
+        if lang == 'pt-br':
+            self.occurrences.add(OccurrenceInterface(self.rec, 0, lang))
+        elif lang == 'pt-BR':
+            self.occurrences.add(OccurrenceInterface(self.rec, 0, lang))
+        elif lang == 'PT-BR':
+            self.occurrences.add(OccurrenceInterface(self.rec, 0, lang))
         else:
             self.occurrences.add(OccurrenceInterface(self.rec, 1, lang))
         return self.occurrences.list_of_occurrences

@@ -4,13 +4,13 @@ from ..occurrences.occurrences import Occurrences
 from ..occurrences.occurrence_interface import OccurrenceInterface
 
 
-class RecommendationEmag39:
+class recommendation23:
     """
     Recomendação 3.9 – Em tabelas, utilizar títulos e resumos de forma apropriada
     """
 
     def __init__(self, sourcecode):
-        self.rec = 39
+        self.rec = 23
         self.sourcecode = sourcecode
         self.occurrences = Occurrences()
 

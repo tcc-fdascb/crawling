@@ -14,6 +14,9 @@ class Occurrences:
     """
     def __init__(self):
         self.list_of_occurrences = []
+        self.code_message = []
+        self.list_code_recommendation = []
+        self.list_peso = []
 
     def add(self, occurrence):
         self.list_of_occurrences.append(occurrence)
@@ -27,9 +30,19 @@ class Occurrences:
                 for key in occurrence.keys():
                     print(key)
                     for value in occurrence.get(key):
+                        self.code_message.append(value.code_message)
+                        self.list_code_recommendation.append(value.recommendation)
                         print(value.recommendation,
                               value.code_message,
                               translate_message(messages, value.recommendation, value.code_message),
                               value.tag)
-        else:
-            print("Lista de ocorrências vazia.")
+        qtd_rec = len(set(self.list_code_recommendation))
+        cont0 = self.code_message.count(0)
+        cont1 = self.code_message.count(1)
+        cont2 = self.code_message.count(2)
+        nota_site = int(((cont1 + cont2 + cont0) / qtd_rec) * 10)
+
+        print('','Resultados:','A quantidade de  atributos validados = ' + str(cont0), 'A quantidade de avisos = ' + str(cont1),
+                      'A quantidade de erros críticos= ' + str(cont2), 'Recomendações = ' + str(qtd_rec),
+                      'Nota = ' + str(nota_site), sep='\n')
+
