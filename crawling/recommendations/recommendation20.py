@@ -32,39 +32,39 @@ class Recommendation20:
 
             # Imagens com conteúdo sem descrição (sem alt)
             if not imagem.has_attr('alt'):
-                self.occurrences.add(OccurrenceInterface(self.rec, 1, imagem))
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, imagem, 3))
                 has_error_or_warning = True
             else:
                 # Imagens decorativas
                 if imagem['alt'] == '':
-                    self.occurrences.add(OccurrenceInterface(self.rec, 2, imagem))
+                    self.occurrences.add(OccurrenceInterface(self.rec, 2, imagem, 3))
                     has_error_or_warning = True
 
                 # Imagens com descrição longas
                 if len(imagem['alt']) > 140:
-                    self.occurrences.add(OccurrenceInterface(self.rec, 3, imagem))
+                    self.occurrences.add(OccurrenceInterface(self.rec, 3, imagem, 3))
                     has_error_or_warning = True
 
                 # Imagem com dupla descrição, title e alt iguais
                 if 'title' in imagem.attrs:
                     if imagem['alt'] == imagem['title']:
-                        self.occurrences.add(OccurrenceInterface(self.rec, 4, imagem))
+                        self.occurrences.add(OccurrenceInterface(self.rec, 4, imagem, 3))
                         has_error_or_warning = True
 
                 # Imagens com descrição inadequada
                 for desc in ['figura', 'imagem', 'image', 'img', 'alt', 'descrição', 'desc', 'foto', 'photo', 'picture', 'pic']:
                     if desc == imagem['alt']:
-                        self.occurrences.add(OccurrenceInterface(self.rec, 5, imagem))
+                        self.occurrences.add(OccurrenceInterface(self.rec, 5, imagem, 3))
                         has_error_or_warning = True
 
                 # Imagens diferentes com a mesma descrição
                 imagens_alt.append(imagem['alt'])
                 if imagem['alt'] != '' and imagem['alt'] in imagens_alt[:-1]:
-                    self.occurrences.add(OccurrenceInterface(self.rec, 6, imagem))
+                    self.occurrences.add(OccurrenceInterface(self.rec, 6, imagem, 3))
                     has_error_or_warning = True
 
             # Não encontrou erros
             if not has_error_or_warning:
-                self.occurrences.add(OccurrenceInterface(self.rec, 0, imagem))
+                self.occurrences.add(OccurrenceInterface(self.rec, 0, imagem, 3))
 
         return self.occurrences.list_of_occurrences

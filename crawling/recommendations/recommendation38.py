@@ -4,7 +4,7 @@ from ..occurrences.occurrences import Occurrences
 from ..occurrences.occurrence_interface import OccurrenceInterface
 
 
-class Recommendation38:
+class recommendation38:
     """
     Recomendação 08: Fornecer alternativa em texto para os botões de imagem de formulários
     """

@@ -7,11 +7,6 @@ from datetime import datetime as dt
 from crawling.recommendations import *
 from crawling.occurrences import Occurrences
 
-from crawling.recommendations.RecommendationEmag19 import  RecommendationEmag19
-from crawling.recommendations.RecommendationEmag31 import RecommendationEmag31
-from crawling.recommendations.RecommendationEmag39 import RecommendationEmag39
-from crawling.recommendations.RecommendationEmag51 import RecommendationEmag51
-from crawling.recommendations.RecommendationEmag61 import  RecommendationEmag61
 
 # Define o arquivo de entrada
 CSV_FILE = 'data/cities-abc.csv'
@@ -100,6 +95,7 @@ class ValidateCity(Thread):
         recomendações listadas e guarda suas ocorrências na lista de ocorrências.
         """
         if self.sourcecode is not None:
+
             rec01_html = Recommendation01(self.sourcecode, url=self.city['url']).validar_css()
             occurrences.add({self.city['_id']: rec01_html})
             rec01_css = Recommendation01(self.sourcecode, url=self.city['url']).validar_html()
@@ -108,17 +104,18 @@ class ValidateCity(Thread):
             occurrences.add({self.city['_id']: rec06})
             rec20 = Recommendation20(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: rec20})
+            rec09 = recommendation09(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: rec09})
+            rec16 = recommendation16(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: rec16})
+            rec23 = recommendation23(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: rec23})
+            rec33 = recommendation33(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: rec33})
+            #rec38 = recommendation38(self.sourcecode).avaliacao()
+            #occurrences.add({self.city['_id']: rec38})
 
-            recemag19 = RecommendationEmag19(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: recemag19})
-            recemag31 = RecommendationEmag31(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: recemag31})
-            recemag39 = RecommendationEmag39(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: recemag39})
-            recemag51 = RecommendationEmag51(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: recemag51})
-            recemag61 = RecommendationEmag61(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: recemag61})
+
 
 
 cities = csv_file_to_dict(CSV_FILE)

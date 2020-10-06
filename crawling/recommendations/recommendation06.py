@@ -64,14 +64,14 @@ class Recommendation06:
                     break
 
             if link_has_bad_style or parent_has_bad_style:
-                self.occurrences.add(OccurrenceInterface(self.rec, 2, first_link))
+                self.occurrences.add(OccurrenceInterface(self.rec, 2, first_link, 1))
                 has_error_or_warning = True
         else:
-            self.occurrences.add(OccurrenceInterface(self.rec, 1, first_link))
+            self.occurrences.add(OccurrenceInterface(self.rec, 1, first_link, 1))
             has_error_or_warning = True
 
         if not has_error_or_warning:
-            self.occurrences.add(OccurrenceInterface(self.rec, 0, first_link))
+            self.occurrences.add(OccurrenceInterface(self.rec, 0, first_link, 1))
             pass
 
         return self.occurrences.list_of_occurrences

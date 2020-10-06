@@ -1,11 +1,11 @@
 recommendation,type_feedback,code_message,message
 1,0,0,O documento HTML foi validado com sucesso.
-1,1,1,"O documento HTML contêm erros que devem ser corrigidos. O documento é inválido."
+1,1,1,O documento HTML contêm erros que devem ser corrigidos. O documento é inválido.
 1,0,2,A folha de estilo foi validada com sucesso.
-1,1,3,"A folha de estilo contêm erros que devem ser corrigidos. A folha de estilo é inválida."
+1,1,3,A folha de estilo contêm erros que devem ser corrigidos. A folha de estilo é inválida.
 6,0,0,Passou por todos os nossos testes.
 6,1,1,Não foi identificado um atalho para o conteúdo principal.
-6,1,2,"Há atalho para o conteúdo principal, no entanto, não pode ser lido por leitores pois ele ou um dos seus elementos pai contêm regras CSS impeditivas."
+6,1,2,Há atalho para o conteúdo principal no entanto não pode ser lido por leitores pois ele ou um dos seus elementos pai contêm regras CSS impeditivas.
 7,0,0,Passou por todos os nossos testes.
 7,1,1,Foram usadas elementos table para leiautar a página.
 7,1,2,Há elementos form dentro de elementos table.
@@ -16,16 +16,16 @@ recommendation,type_feedback,code_message,message
 20,0,0,Passou por todos os nossos testes.
 20,1,1,Imagem sem o atributo alt.
 20,2,2,Imagem com o atributo alt vazio caracteriza uma imagem decorativa.
-20,2,3,"Imagem com descrição longa, mais de 140 caracteres."
-20,2,4,"Imagem com dupla descrição, title e alt iguais."
+20,2,3,Imagem com descrição longa mais de 140 caracteres.
+20,2,4,Imagem com dupla descrição title e alt iguais.
 20,1,5,Imagem com descrição inadequada.
 20,1,6,Há outras imagens com a mesma descrição.
 31,0,0,Pagina em PT-BR.
 31,1,1,Pagina em outro idioma
 19,0,0,Passou por todos os nossos testes.
 19,1,1,Pode abrir Novas Instâncias
-61,0,0,Passou por todos os nossos testes.
-61,1,1,Botão sem descrição.
-39,0,0,Tabela com descrição.
-39,1,1,Tabela sem descrição.
-51,2,0,Atenção possui presença de vídeo.
+38,0,0,Passou por todos os nossos testes.
+38,1,1,Botão sem descrição.
+23,0,0,Tabela com descrição.
+23,1,1,Tabela sem descrição.
+33,2,0,Atenção possui presença de vídeo.

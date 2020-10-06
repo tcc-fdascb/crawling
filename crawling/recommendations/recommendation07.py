@@ -30,7 +30,7 @@ class Recommendation07:
 
         for tableitem in soap.select('table form'):
             if tableitem:
-                self.occurrences.add(OccurrenceInterface(self.rec, 2, tableitem))
+                self.occurrences.add(OccurrenceInterface(self.rec, 2, tableitem, 2))
                 ispassou = False
 
         for verifica in ['topo', 'main', 'rodape', 'principal', 'menu', 'nav', 'navigation', 'navegacao', 'header',
@@ -38,13 +38,13 @@ class Recommendation07:
             selectionclass = 'table .' + verifica
             selectionids = 'table #' + verifica
             if soap.select(selectionclass):
-                self.occurrences.add(OccurrenceInterface(self.rec, 1, soap.select(selectionclass)))
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, soap.select(selectionclass), 2))
                 ispassou = False
             if soap.select(selectionids):
-                self.occurrences.add(OccurrenceInterface(self.rec, 1, soap.select(selectionids)))
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, soap.select(selectionids), 2))
                 ispassou = False
 
         if ispassou:
-            self.occurrences.add(OccurrenceInterface(self.rec, 0,""))
+            self.occurrences.add(OccurrenceInterface(self.rec, 0,"", 2))
 
         return self.occurrences.list_of_occurrences

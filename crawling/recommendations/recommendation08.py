@@ -33,24 +33,24 @@ class Recommendation08:
                 if '</a><a' in par:  # verifica se tem um fechamento ligado na abertura de outra tag a
                     # dispara erro
                     ispassou = False
-                    self.occurrences.add(OccurrenceInterface(self.rec, 1, par))
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, par, 1))
                 if '</a> <a' in par:  # verifica se tem espaço entre fechamento e abertura de outra tag a
                     # dispara erro
-                    self.occurrences.add(OccurrenceInterface(self.rec, 1, par))
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, par, 1))
                     ispassou = False
                 if conj[0] in paragrafosemespaco or conj[1] in paragrafosemespaco or conj[2] in paragrafosemespaco:
                     # verifica se tem a tag de quebra de linha entre fechamento e abertura de outra tag a
                     # dispara erro
-                    self.occurrences.add(OccurrenceInterface(self.rec, 1, par))
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, par, 1))
                     ispassou = False
                 if str(
                         "</a>\n<a") in paragrafosemespaco:  # verifica se tem quebra de linha entra o fechamento e abertura de outra tag a
-                    self.occurrences.add(OccurrenceInterface(self.rec, 1, par))
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, par, 1))
                     ispassou = False
                 if "</a><br>\n<a" in paragrafosemespaco:
-                    self.occurrences.add(OccurrenceInterface(self.rec, 1, par))
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, par, 1))
                     ispassou = False
         if ispassou:
-            self.occurrences.add(OccurrenceInterface(self.rec, 0,""))
+            self.occurrences.add(OccurrenceInterface(self.rec, 0,"", 2))
 
         return self.occurrences.list_of_occurrences

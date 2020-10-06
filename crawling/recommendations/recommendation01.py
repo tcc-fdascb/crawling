@@ -46,9 +46,9 @@ class Recommendation01:
                 if analizer.status_code == 200:
                     res = analizer.json()
                     if res['cssvalidation']['validity']:
-                        self.occurrences.add(OccurrenceInterface(self.rec, 2, link_tag))
+                        self.occurrences.add(OccurrenceInterface(self.rec, 2, link_tag, 2))
                     else:
-                        self.occurrences.add(OccurrenceInterface(self.rec, 3, link_tag))
+                        self.occurrences.add(OccurrenceInterface(self.rec, 3, link_tag, 2))
 
         return self.occurrences.list_of_occurrences
 
@@ -66,8 +66,8 @@ class Recommendation01:
                     break
 
         if is_valid:
-            self.occurrences.add(OccurrenceInterface(self.rec, 0, ''))
+            self.occurrences.add(OccurrenceInterface(self.rec, 0, '', 1))
         else:
-            self.occurrences.add(OccurrenceInterface(self.rec, 1, ''))
+            self.occurrences.add(OccurrenceInterface(self.rec, 1, '', 1))
 
         return self.occurrences.list_of_occurrences

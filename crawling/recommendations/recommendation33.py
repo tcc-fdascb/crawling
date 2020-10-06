@@ -4,7 +4,7 @@ from ..occurrences.occurrences import Occurrences
 from ..occurrences.occurrence_interface import OccurrenceInterface
 
 
-class RecommendationEmag51:
+class recommendation33:
     """
     5.1 - Fornecer alternativa para vídeo
     5.2 - Fornecer alternativa para áudio
@@ -22,5 +22,5 @@ class RecommendationEmag51:
         videos = soap.find_all('video')
 
         for video in videos:
-            self.occurrences.add(OccurrenceInterface(self.rec, 2, video))
+            self.occurrences.add(OccurrenceInterface(self.rec, 2, video, 3))
         return self.occurrences.list_of_occurrences
