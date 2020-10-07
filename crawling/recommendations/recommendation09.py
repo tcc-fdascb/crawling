@@ -4,13 +4,13 @@ from ..occurrences.occurrences import Occurrences
 from ..occurrences.occurrence_interface import OccurrenceInterface
 
 
-class recommendation09:
+class Recommendation09:
     """
-    Recomendação 1.9 do eMAG: 1.9 – Não abrir novas instâncias sem a solicitação do usuário
+    Recomendação 9: Não abrir novas instâncias sem a solicitação do usuário
     """
 
     def __init__(self, sourcecode):
-        self.rec = 19
+        self.rec = 9
         self.sourcecode = sourcecode
         self.occurrences = Occurrences()
 

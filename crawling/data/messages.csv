@@ -13,6 +13,8 @@ recommendation,type_feedback,code_message,message
 8,0,0,Passou por todos os nossos testes.
 8,1,1,Há links adjacentes sem nenhum tipo de separação.
 8,1,2,Há links adjacentes separados por símbolos.
+19,0,0,Passou por todos os nossos testes.
+19,1,1,Pode abrir Novas Instâncias
 20,0,0,Passou por todos os nossos testes.
 20,1,1,Imagem sem o atributo alt.
 20,2,2,Imagem com o atributo alt vazio caracteriza uma imagem decorativa.
@@ -20,12 +22,10 @@ recommendation,type_feedback,code_message,message
 20,2,4,Imagem com dupla descrição title e alt iguais.
 20,1,5,Imagem com descrição inadequada.
 20,1,6,Há outras imagens com a mesma descrição.
-31,0,0,Pagina em PT-BR.
-31,1,1,Pagina em outro idioma
-19,0,0,Passou por todos os nossos testes.
-19,1,1,Pode abrir Novas Instâncias
-38,0,0,Passou por todos os nossos testes.
-38,1,1,Botão sem descrição.
 23,0,0,Tabela com descrição.
 23,1,1,Tabela sem descrição.
+31,0,0,Pagina em PT-BR.
+31,1,1,Pagina em outro idioma
 33,2,0,Atenção possui presença de vídeo.
+38,0,0,Passou por todos os nossos testes.
+38,1,1,Botão sem descrição.

@@ -1,6 +1,6 @@
-class RecommendationModelo:
+class Recommendation26:
     """
-    Recomendação 2: Nome da recomendação
+    Recomendação 26: Nome da recomendação
     Descrição da recomendação se houver
 
     :param name - Recebe o nome da Recomendaçãodd

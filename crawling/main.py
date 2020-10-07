@@ -95,7 +95,6 @@ class ValidateCity(Thread):
         recomendações listadas e guarda suas ocorrências na lista de ocorrências.
         """
         if self.sourcecode is not None:
-
             rec01_html = Recommendation01(self.sourcecode, url=self.city['url']).validar_css()
             occurrences.add({self.city['_id']: rec01_html})
             rec01_css = Recommendation01(self.sourcecode, url=self.city['url']).validar_html()
@@ -104,18 +103,16 @@ class ValidateCity(Thread):
             occurrences.add({self.city['_id']: rec06})
             rec20 = Recommendation20(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: rec20})
-            rec09 = recommendation09(self.sourcecode).avaliacao()
+            rec09 = Recommendation09(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: rec09})
-            rec16 = recommendation16(self.sourcecode).avaliacao()
+            rec16 = Recommendation16(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: rec16})
-            rec23 = recommendation23(self.sourcecode).avaliacao()
+            rec23 = Recommendation23(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: rec23})
-            rec33 = recommendation33(self.sourcecode).avaliacao()
+            rec33 = Recommendation33(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: rec33})
-            #rec38 = recommendation38(self.sourcecode).avaliacao()
-            #occurrences.add({self.city['_id']: rec38})
-
-
+            # rec38 = Recommendation38(self.sourcecode).avaliacao()
+            # occurrences.add({self.city['_id']: rec38})
 
 
 cities = csv_file_to_dict(CSV_FILE)
