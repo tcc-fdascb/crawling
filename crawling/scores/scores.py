@@ -68,6 +68,7 @@ class Scores:
         self.cities = cities
 
     def calculate(self):
+        print('Iniciando cálculo com base nas ocorrências.')
         amount = {}
 
         if not self.occorrences:

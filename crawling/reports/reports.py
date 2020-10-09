@@ -13,6 +13,7 @@ class Reports:
         self.date_format = '%Y%m%d_%Hh%M'
 
     def cities_evaluation(self):
+        print('Gerando relatório de avaliação das cidades.')
         cities = []
         for c in self.cities:
             cities.append(self.cities[c])
@@ -20,5 +21,6 @@ class Reports:
         df.to_csv(f'output/{dt.now().strftime(self.date_format)}_evaluation.csv', index=False)
 
     def detailed_occurrences(self):
+        print('Gerando relatório detalhado das ocorrências.')
         df = pd.DataFrame(self.occorrences)
         df.to_csv(f'output/{dt.now().strftime(self.date_format)}_occurrences.csv', index=False)

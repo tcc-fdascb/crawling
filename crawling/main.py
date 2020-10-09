@@ -9,9 +9,8 @@ from crawling.recommendations import *
 from crawling.scores import Scores
 from crawling.reports import Reports
 
-
 # Define o arquivo de entrada
-CSV_FILE = 'data/cities-sa.csv'
+CSV_FILE = 'data/cities-abc.csv'
 
 # Inicializa uma estância para lista de ocorrências
 occurrences = Occurrences()
@@ -45,7 +44,10 @@ class ValidateCity(Thread):
             - has_robotstxt (True/False): responde a pergunta se tem ou não o arquivo robots.txt
             - can_crawling (True/False): responde a pergunta se pode ou não fazer crawling
         """
+        print(f'{self.city["city_name"]}: Verificação do arquivo robots.')
+
         try:
+            self.city['timestamp'] = dt.timestamp(dt.now())
             self.city['has_robotstxt'] = False
             self.city['can_crawling'] = True
 
@@ -61,14 +63,14 @@ class ValidateCity(Thread):
 
                 if not robotparser.can_fetch('*', city_url):
                     self.city['can_crawling'] = False
-                    print(f'ID#{self.city["_id"]}: Sem permissão para fazer crawling.')
+                    print(f'{self.city["city_name"]}: Sem permissão para fazer crawling.')
 
             if self.city['can_crawling']:
                 self.sourcecode = self.get_sourcecode()
                 self.validate_recommendations()
 
         except requests.exceptions.RequestException as error:
-            print(dt.timestamp(dt.now()), self.city['_id'], error)
+            print(dt.timestamp(dt.now()), self.city['_id'], self.city["city_name"], error)
 
     def get_sourcecode(self):
         """
@@ -79,23 +81,26 @@ class ValidateCity(Thread):
 
         :return: <Response>.content OR None
         """
+        print(f'{self.city["city_name"]}: Crawling do sourcecode.')
+
         try:
             self.sourcecode = requests.get(self.city['url'], timeout=30)
 
             if self.sourcecode.status_code == 200:
-                self.city['timestamp'] = dt.timestamp(dt.now())
                 return self.sourcecode.content
 
             return None
 
         except requests.exceptions.RequestException as error:
-            print(dt.timestamp(dt.now()), self.city['_id'], error)
+            print(dt.timestamp(dt.now()), self.city['_id'], self.city["city_name"], error)
 
     def validate_recommendations(self):
         """
         A partir do código fonte da página inicial do sítio eletrônico, valida as
         recomendações listadas e guarda suas ocorrências na lista de ocorrências.
         """
+        print(f'{self.city["city_name"]}: Validação das recomendações.')
+
         if self.sourcecode is not None:
             rec01_html = Recommendation01(self.sourcecode, url=self.city['url']).validar_css()
             occurrences.add({self.city['_id']: rec01_html})
@@ -113,12 +118,9 @@ class ValidateCity(Thread):
             occurrences.add({self.city['_id']: rec23})
             rec33 = Recommendation33(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: rec33})
-            # rec38 = Recommendation38(self.sourcecode).avaliacao()
-            # occurrences.add({self.city['_id']: rec38})
 
 
 cities = csv_file_to_dict(CSV_FILE)
-print(cities)
 
 for c in cities:
     validate = ValidateCity(cities[c])
