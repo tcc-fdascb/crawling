@@ -80,8 +80,15 @@ class Scores:
             else:
                 amount[occorrence['city_id']] = extract_info(occorrence)
 
-        for i, k in enumerate(amount.keys()):
-            self.cities[i]['wab'] = round(calculate_wab(amount[k]['errors'], amount[k]['warnings']), 2)
-            self.cities[i]['errors'] = sum(amount[k]['errors'])
-            self.cities[i]['warnings'] = sum(amount[k]['warnings'])
-            self.cities[i]['successes'] = amount[k]['successes']
+        # print(self.cities)
+        # print(amount)
+        # print(amount.keys())
+
+        for k in amount.keys():
+            for c in self.cities:
+                city = self.cities[c]
+                if k == city['_id']:
+                    city['wab'] = round(calculate_wab(amount[k]['errors'], amount[k]['warnings']), 2)
+                    city['errors'] = sum(amount[k]['errors'])
+                    city['warnings'] = sum(amount[k]['warnings'])
+                    city['successes'] = amount[k]['successes']
