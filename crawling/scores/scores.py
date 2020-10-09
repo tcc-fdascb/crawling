@@ -80,10 +80,6 @@ class Scores:
             else:
                 amount[occorrence['city_id']] = extract_info(occorrence)
 
-        # print(self.cities)
-        # print(amount)
-        # print(amount.keys())
-
         for k in amount.keys():
             for c in self.cities:
                 city = self.cities[c]
