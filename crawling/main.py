@@ -4,8 +4,10 @@ import pandas as pd
 import urllib.robotparser
 from datetime import datetime as dt
 
-from crawling.recommendations import *
 from crawling.occurrences import Occurrences
+from crawling.recommendations import *
+from crawling.scores import Scores
+from crawling.reports import Reports
 
 
 # Define o arquivo de entrada
@@ -35,27 +37,6 @@ class ValidateCity(Thread):
 
     def run(self):
         self.validate_robots()
-
-    def get_sourcecode(self):
-        """
-        Faz requisição do código fonte da página inicial do sítio eletrônico.
-        Se bem sucedido, guarda duas novas keys no dict da cidade correspondente:
-            - date_sourcecode: timestamp da requisição
-            - sourcecode: conteúdo da resposta da requisição
-
-        :return: <Response>.content OR None
-        """
-        try:
-            self.sourcecode = requests.get(self.city['url'], timeout=30)
-
-            if self.sourcecode.status_code == 200:
-                self.city['date_sourcecode'] = dt.timestamp(dt.now())
-                return self.sourcecode.content
-
-            return None
-
-        except requests.exceptions.RequestException as error:
-            print(dt.timestamp(dt.now()), self.city['city_name'], error)
 
     def validate_robots(self):
         """
@@ -89,6 +70,27 @@ class ValidateCity(Thread):
         except requests.exceptions.RequestException as error:
             print(dt.timestamp(dt.now()), self.city['city_name'], error)
 
+    def get_sourcecode(self):
+        """
+        Faz requisição do código fonte da página inicial do sítio eletrônico.
+        Se bem sucedido, guarda duas novas keys no dict da cidade correspondente:
+            - timestamp: momento da requisição
+            - sourcecode: conteúdo da resposta da requisição
+
+        :return: <Response>.content OR None
+        """
+        try:
+            self.sourcecode = requests.get(self.city['url'], timeout=30)
+
+            if self.sourcecode.status_code == 200:
+                self.city['timestamp'] = dt.timestamp(dt.now())
+                return self.sourcecode.content
+
+            return None
+
+        except requests.exceptions.RequestException as error:
+            print(dt.timestamp(dt.now()), self.city['city_name'], error)
+
     def validate_recommendations(self):
         """
         A partir do código fonte da página inicial do sítio eletrônico, valida as
@@ -103,14 +105,14 @@ class ValidateCity(Thread):
             occurrences.add({self.city['_id']: rec06})
             rec20 = Recommendation20(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: rec20})
-            rec09 = Recommendation09(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec09})
-            rec16 = Recommendation16(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec16})
-            rec23 = Recommendation23(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec23})
-            rec33 = Recommendation33(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec33})
+            # rec09 = Recommendation09(self.sourcecode).avaliacao()
+            # occurrences.add({self.city['_id']: rec09})
+            # rec16 = Recommendation16(self.sourcecode).avaliacao()
+            # occurrences.add({self.city['_id']: rec16})
+            # rec23 = Recommendation23(self.sourcecode).avaliacao()
+            # occurrences.add({self.city['_id']: rec23})
+            # rec33 = Recommendation33(self.sourcecode).avaliacao()
+            # occurrences.add({self.city['_id']: rec33})
             # rec38 = Recommendation38(self.sourcecode).avaliacao()
             # occurrences.add({self.city['_id']: rec38})
 
@@ -123,7 +125,14 @@ for c in cities:
     validate.start()
     validate.join()
 
-print(cities)
+# Exibe as ocorrências
+# occurrences.show_log()
 
-# Exibe ocorrências
-occurrences.show()
+# Exibe e exporta o scores
+scores = Scores(occurrences.convert_to_dict(), cities)
+scores.calculate()
+
+# Gera relatórios
+reports = Reports(occurrences.convert_to_dict(), cities)
+reports.detailed_occurrences()
+reports.cities_evaluation()

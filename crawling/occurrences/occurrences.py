@@ -5,7 +5,11 @@ def translate_message(messages, recommendation, code_message):
     code = ['OK', 'ERRO', 'ALERTA']
     for message in messages:
         if messages[message]['recommendation'] == recommendation and messages[message]['code_message'] == code_message:
-            return code[messages[message]['type_feedback']] + ': ' + messages[message]['message']
+            return {
+                'type_code': messages[message]['type_feedback'],
+                'type': code[messages[message]['type_feedback']],
+                'message': messages[message]['message']
+            }
 
 
 class Occurrences:
@@ -14,35 +18,54 @@ class Occurrences:
     """
     def __init__(self):
         self.list_of_occurrences = []
-        self.code_message = []
-        self.list_code_recommendation = []
-        self.list_peso = []
-        self.list_type_feedback = []
 
     def add(self, occurrence):
         self.list_of_occurrences.append(occurrence)
 
-    def show(self):
+    def is_empty(self):
+        if len(self.list_of_occurrences) > 0 and self.list_of_occurrences[0][0] is not None:
+            return False
+        return True
+
+    def convert_to_dict(self):
         messages = pd.read_csv('data/messages.csv').to_dict(orient='index')
 
-        if len(self.list_of_occurrences) > 0 and self.list_of_occurrences[0][0] is not None:
-            print("Lista de ocorrências:")
-            for occurrence in self.list_of_occurrences:
-                for key in occurrence.keys():
-                    for value in occurrence.get(key):
-                        self.code_message.append(value.code_message)
-                        self.list_code_recommendation.append(value.recommendation)
-                        print(value.recommendation,
-                              value.code_message,
-                              translate_message(messages, value.recommendation, value.code_message),
-                              value.tag)
-        qtd_rec = len(set(self.list_code_recommendation))
-        cont0 = self.code_message.count(0)
-        cont1 = self.code_message.count(1)
-        cont2 = self.code_message.count(2)
-        nota_site = int(((cont1 + cont2 + cont0) / qtd_rec) * 10)
+        if self.is_empty():
+            print('Lista de ocorrências vazia.')
+            return False
 
-        print('','Resultados:','A quantidade de  atributos validados = ' + str(cont0), 'A quantidade de avisos = ' + str(cont1),
-                      'A quantidade de erros críticos= ' + str(cont2), 'Recomendações = ' + str(qtd_rec),
-                      'Nota = ' + str(nota_site), sep='\n')
+        list_of_dict = []
+        for occurrence in self.list_of_occurrences:
+            for key in occurrence.keys():
+                for value in occurrence.get(key):
+                    message = translate_message(messages, value.recommendation, value.code_message)
+                    list_of_dict.append({
+                        'city_id': key,
+                        'recommendation': value.recommendation,
+                        'type_code': message['type_code'],
+                        'type': message['type'],
+                        'message': message['message'],
+                        'message_code': value.code_message,
+                        'tag': str(value.tag),
+                        'peso': value.peso
+                    })
+        return list_of_dict
 
+    def show_log(self):
+        if self.is_empty():
+            print('Lista de ocorrências vazia.')
+            return False
+
+        dicts = self.convert_to_dict()
+        print('\n----------------- LOG START -----------------')
+        for i, d in enumerate(dicts):
+            print(f'#{i} | '
+                  f'City ID {d["city_id"]} | '
+                  f'REC {d["recommendation"]} | '
+                  f'Type({d["type_code"]}): {d["type"]} | '
+                  f'Message({d["message_code"]}): {d["message"]} | '
+                  f'Tag: {d["tag"]} | '
+                  f'Peso: {d["peso"]}'
+                  )
+        print('----------------- LOG END -----------------\n')
+        return True

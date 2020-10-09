@@ -7,8 +7,7 @@ class OccurrenceInterface:
     @param: tag - tag HTML que foi avaliada
     @param: peso - peso da recomendação
     """
-    # TODO: Remover valor padrão do peso
-    def __init__(self, recommendation, code_message, tag, peso=0):
+    def __init__(self, recommendation, code_message, tag, peso):
         self.recommendation = recommendation
         self.code_message = code_message
         self.tag = tag
