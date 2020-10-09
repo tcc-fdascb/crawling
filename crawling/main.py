@@ -11,7 +11,7 @@ from crawling.reports import Reports
 
 
 # Define o arquivo de entrada
-CSV_FILE = 'data/cities-abc.csv'
+CSV_FILE = 'data/cities-sa.csv'
 
 # Inicializa uma estância para lista de ocorrências
 occurrences = Occurrences()
@@ -61,14 +61,14 @@ class ValidateCity(Thread):
 
                 if not robotparser.can_fetch('*', city_url):
                     self.city['can_crawling'] = False
-                    print('Não tenho permissão para fazer crawling da cidade:', self.city['city_name'])
+                    print(f'ID#{self.city["_id"]}: Sem permissão para fazer crawling.')
 
             if self.city['can_crawling']:
                 self.sourcecode = self.get_sourcecode()
                 self.validate_recommendations()
 
         except requests.exceptions.RequestException as error:
-            print(dt.timestamp(dt.now()), self.city['city_name'], error)
+            print(dt.timestamp(dt.now()), self.city['_id'], error)
 
     def get_sourcecode(self):
         """
@@ -89,7 +89,7 @@ class ValidateCity(Thread):
             return None
 
         except requests.exceptions.RequestException as error:
-            print(dt.timestamp(dt.now()), self.city['city_name'], error)
+            print(dt.timestamp(dt.now()), self.city['_id'], error)
 
     def validate_recommendations(self):
         """
@@ -105,14 +105,14 @@ class ValidateCity(Thread):
             occurrences.add({self.city['_id']: rec06})
             rec20 = Recommendation20(self.sourcecode).avaliacao()
             occurrences.add({self.city['_id']: rec20})
-            # rec09 = Recommendation09(self.sourcecode).avaliacao()
-            # occurrences.add({self.city['_id']: rec09})
-            # rec16 = Recommendation16(self.sourcecode).avaliacao()
-            # occurrences.add({self.city['_id']: rec16})
-            # rec23 = Recommendation23(self.sourcecode).avaliacao()
-            # occurrences.add({self.city['_id']: rec23})
-            # rec33 = Recommendation33(self.sourcecode).avaliacao()
-            # occurrences.add({self.city['_id']: rec33})
+            rec09 = Recommendation09(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: rec09})
+            rec16 = Recommendation16(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: rec16})
+            rec23 = Recommendation23(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: rec23})
+            rec33 = Recommendation33(self.sourcecode).avaliacao()
+            occurrences.add({self.city['_id']: rec33})
             # rec38 = Recommendation38(self.sourcecode).avaliacao()
             # occurrences.add({self.city['_id']: rec38})
 
@@ -129,10 +129,10 @@ for c in cities:
 # occurrences.show_log()
 
 # Exibe e exporta o scores
-scores = Scores(occurrences.convert_to_dict(), cities)
+scores = Scores(occurrences.convert(), cities)
 scores.calculate()
 
 # Gera relatórios
-reports = Reports(occurrences.convert_to_dict(), cities)
+reports = Reports(occurrences.convert(), cities)
 reports.detailed_occurrences()
 reports.cities_evaluation()

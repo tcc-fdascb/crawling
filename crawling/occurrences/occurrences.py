@@ -23,15 +23,15 @@ class Occurrences:
         self.list_of_occurrences.append(occurrence)
 
     def is_empty(self):
-        if len(self.list_of_occurrences) > 0 and self.list_of_occurrences[0][0] is not None:
+        if len(self.list_of_occurrences) > 0:
             return False
         return True
 
-    def convert_to_dict(self):
+    def convert(self):
         messages = pd.read_csv('data/messages.csv').to_dict(orient='index')
 
         if self.is_empty():
-            print('Lista de ocorrências vazia.')
+            print('<class Occurrences> Converção impossível. Lista de ocorrências vazia.')
             return False
 
         list_of_dict = []
@@ -39,6 +39,7 @@ class Occurrences:
             for key in occurrence.keys():
                 for value in occurrence.get(key):
                     message = translate_message(messages, value.recommendation, value.code_message)
+                    message = message if message else {'type_code': '', 'type': '', 'message': ''}
                     list_of_dict.append({
                         'city_id': key,
                         'recommendation': value.recommendation,
@@ -53,10 +54,10 @@ class Occurrences:
 
     def show_log(self):
         if self.is_empty():
-            print('Lista de ocorrências vazia.')
+            print('<class Occurrences> Não há o que ser mostrado. Lista de ocorrências vazia.')
             return False
 
-        dicts = self.convert_to_dict()
+        dicts = self.convert()
         print('\n----------------- LOG START -----------------')
         for i, d in enumerate(dicts):
             print(f'#{i} | '

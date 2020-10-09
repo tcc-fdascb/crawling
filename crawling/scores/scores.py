@@ -70,14 +70,17 @@ class Scores:
     def calculate(self):
         amount = {}
 
+        if not self.occorrences:
+            print('<class Scores> Lista de ocorrências vazia.')
+
         for occorrence in self.occorrences:
             if occorrence['city_id'] in amount.keys():
                 amount[occorrence['city_id']] = extract_info(occorrence, amount[occorrence['city_id']])
             else:
                 amount[occorrence['city_id']] = extract_info(occorrence)
 
-        for c in amount:
-            self.cities[c]['wab'] = round(calculate_wab(amount[c]['errors'], amount[c]['warnings']), 2)
-            self.cities[c]['errors'] = sum(amount[c]['errors'])
-            self.cities[c]['warnings'] = sum(amount[c]['warnings'])
-            self.cities[c]['successes'] = amount[c]['successes']
+        for i, k in enumerate(amount.keys()):
+            self.cities[i]['wab'] = round(calculate_wab(amount[k]['errors'], amount[k]['warnings']), 2)
+            self.cities[i]['errors'] = sum(amount[k]['errors'])
+            self.cities[i]['warnings'] = sum(amount[k]['warnings'])
+            self.cities[i]['successes'] = amount[k]['successes']
