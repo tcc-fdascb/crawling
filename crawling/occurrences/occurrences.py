@@ -32,7 +32,7 @@ class Occurrences:
 
         if self.is_empty():
             print('<class Occurrences> Converção impossível. Lista de ocorrências vazia.')
-            return False
+            return []
 
         list_of_dict = []
         for occurrence in self.list_of_occurrences:

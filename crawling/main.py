@@ -1,140 +1,35 @@
-import requests
-from threading import Thread
 import pandas as pd
-import urllib.robotparser
-from datetime import datetime as dt
 
-from crawling.occurrences import Occurrences
-from crawling.recommendations import *
+from crawling.evaluation import Evaluation
 from crawling.scores import Scores
 from crawling.reports import Reports
 
+
 # Define o arquivo de entrada
 CSV_FILE = 'data/cities-abc.csv'
+cities = pd.read_csv(CSV_FILE)
+cities = cities.to_dict(orient='index')
 
-# Inicializa uma estância para lista de ocorrências
-occurrences = Occurrences()
+threads = []
+occurrences_by_cities = []
+occurrences = []
 
+for i, c in enumerate(cities):
+    threads.insert(i, Evaluation(cities[c]))
+    threads[i].start()
 
-def csv_file_to_dict(file):
-    try:
-        data = pd.read_csv(file)
-        data = data.to_dict(orient='index')
-        return data
-    except Exception:
-        raise
+for i, thread in enumerate(threads):
+    threads[i].join()
+    occurrences_by_cities.append(threads[i].get_occurrences())
 
+for occ in occurrences_by_cities:
+    occurrences += occ
 
-class ValidateCity(Thread):
-    """
-    Conjunto de métodos para aplicação de Threads e avaliações para os sítios eletrônicos.
-    """
-    def __init__(self, city):
-        Thread.__init__(self)
-        self.city = city
-        self.sourcecode = None
-
-    def run(self):
-        self.validate_robots()
-
-    def validate_robots(self):
-        """
-        Confere o arquivo robots.txt dos sites e verifica condições de Dissalow
-        adicionando duas keys novas ao dict da cidade correspondente:
-            - has_robotstxt (True/False): responde a pergunta se tem ou não o arquivo robots.txt
-            - can_crawling (True/False): responde a pergunta se pode ou não fazer crawling
-        """
-        print(f'{self.city["city_name"]}: Verificação do arquivo robots.')
-
-        try:
-            self.city['timestamp'] = dt.timestamp(dt.now())
-            self.city['has_robotstxt'] = False
-            self.city['can_crawling'] = True
-
-            city_url = self.city['url']
-            city_url_robots = city_url + 'robots.txt'
-            robotstxt = requests.get(city_url_robots, timeout=30)
-
-            if robotstxt.status_code == 200:
-                self.city['has_robotstxt'] = True
-                robotparser = urllib.robotparser.RobotFileParser()
-                robotparser.set_url(city_url_robots)
-                robotparser.read()
-
-                if not robotparser.can_fetch('*', city_url):
-                    self.city['can_crawling'] = False
-                    print(f'{self.city["city_name"]}: Sem permissão para fazer crawling.')
-
-            if self.city['can_crawling']:
-                self.sourcecode = self.get_sourcecode()
-                self.validate_recommendations()
-
-        except requests.exceptions.RequestException as error:
-            print(dt.timestamp(dt.now()), self.city['_id'], self.city["city_name"], error)
-
-    def get_sourcecode(self):
-        """
-        Faz requisição do código fonte da página inicial do sítio eletrônico.
-        Se bem sucedido, guarda duas novas keys no dict da cidade correspondente:
-            - timestamp: momento da requisição
-            - sourcecode: conteúdo da resposta da requisição
-
-        :return: <Response>.content OR None
-        """
-        print(f'{self.city["city_name"]}: Crawling do sourcecode.')
-
-        try:
-            self.sourcecode = requests.get(self.city['url'], timeout=30)
-
-            if self.sourcecode.status_code == 200:
-                return self.sourcecode.content
-
-            return None
-
-        except requests.exceptions.RequestException as error:
-            print(dt.timestamp(dt.now()), self.city['_id'], self.city["city_name"], error)
-
-    def validate_recommendations(self):
-        """
-        A partir do código fonte da página inicial do sítio eletrônico, valida as
-        recomendações listadas e guarda suas ocorrências na lista de ocorrências.
-        """
-        print(f'{self.city["city_name"]}: Validação das recomendações.')
-
-        if self.sourcecode is not None:
-            rec01_html = Recommendation01(self.sourcecode, url=self.city['url']).validar_css()
-            occurrences.add({self.city['_id']: rec01_html})
-            rec01_css = Recommendation01(self.sourcecode, url=self.city['url']).validar_html()
-            occurrences.add({self.city['_id']: rec01_css})
-            rec06 = Recommendation06(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec06})
-            rec20 = Recommendation20(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec20})
-            rec09 = Recommendation09(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec09})
-            rec16 = Recommendation16(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec16})
-            rec23 = Recommendation23(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec23})
-            rec33 = Recommendation33(self.sourcecode).avaliacao()
-            occurrences.add({self.city['_id']: rec33})
-
-
-cities = csv_file_to_dict(CSV_FILE)
-
-for c in cities:
-    validate = ValidateCity(cities[c])
-    validate.start()
-    validate.join()
-
-# Exibe as ocorrências
-# occurrences.show_log()
-
-# Exibe e exporta o scores
-scores = Scores(occurrences.convert(), cities)
+# Cálcula os score com base nas ocorrências
+scores = Scores(occurrences, cities)
 scores.calculate()
 
 # Gera relatórios
-reports = Reports(occurrences.convert(), cities)
+reports = Reports(occurrences, cities)
 reports.detailed_occurrences()
 reports.cities_evaluation()
