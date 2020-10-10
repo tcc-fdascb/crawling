@@ -4,24 +4,6 @@ from ..occurrences.occurrences import Occurrences
 from ..occurrences.occurrence_interface import OccurrenceInterface
 
 
-def has_bad_style(s):
-    rules = ['display:none', 'overflow:hidden', 'visibility:hidden']
-    s = s.replace(' ', '').lower()
-    for rule in rules:
-        if rule in s:
-            return True
-    return False
-
-
-def is_back_to_top(el):
-    words = ['topo', 'voltar']
-    s = str(el).replace(' ', '').lower()
-    for word in words:
-        if word in s:
-            return True
-    return False
-
-
 class Recommendation06:
     """
     Recomendação 6: Fornecer âncoras para ir direto a um bloco de conteúdo
@@ -75,3 +57,21 @@ class Recommendation06:
             pass
 
         return self.occurrences.list_of_occurrences
+
+
+def has_bad_style(s):
+    rules = ['display:none', 'overflow:hidden', 'visibility:hidden']
+    s = s.replace(' ', '').lower()
+    for rule in rules:
+        if rule in s:
+            return True
+    return False
+
+
+def is_back_to_top(el):
+    words = ['topo', 'voltar']
+    s = str(el).replace(' ', '').lower()
+    for word in words:
+        if word in s:
+            return True
+    return False

@@ -1,17 +1,6 @@
 import pandas as pd
 
 
-def translate_message(messages, recommendation, code_message):
-    code = ['OK', 'ERRO', 'ALERTA']
-    for message in messages:
-        if messages[message]['recommendation'] == recommendation and messages[message]['code_message'] == code_message:
-            return {
-                'type_code': messages[message]['type_feedback'],
-                'type': code[messages[message]['type_feedback']],
-                'message': messages[message]['message']
-            }
-
-
 class Occurrences:
     """
     Organiza as ocorrências em uma lista e trata sua exibição
@@ -71,3 +60,14 @@ class Occurrences:
                   )
         print('----------------- LOG END -----------------\n')
         return True
+
+
+def translate_message(messages, recommendation, code_message):
+    code = ['OK', 'ERRO', 'ALERTA']
+    for message in messages:
+        if messages[message]['recommendation'] == recommendation and messages[message]['code_message'] == code_message:
+            return {
+                'type_code': messages[message]['type_feedback'],
+                'type': code[messages[message]['type_feedback']],
+                'message': messages[message]['message']
+            }

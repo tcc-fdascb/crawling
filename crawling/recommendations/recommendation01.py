@@ -11,10 +11,6 @@ WEBSERVICE_CSS = 'http://jigsaw.w3.org/css-validator/validator?uri=$url&profile=
 WEBSERVICE_HTML = 'http://validator.w3.org/nu/?doc=$url&out=json'
 
 
-def encode_url(t):
-    return quote(t, safe='')
-
-
 class Recommendation01:
     """
         Recomendação 01: Validar HTML e CSS do sitio eletrônico
@@ -71,3 +67,7 @@ class Recommendation01:
             self.occurrences.add(OccurrenceInterface(self.rec, 1, '', 1))
 
         return self.occurrences.list_of_occurrences
+
+
+def encode_url(t):
+    return quote(t, safe='')
