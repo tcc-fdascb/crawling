@@ -18,6 +18,7 @@ class Recommendation38:
         soap = BeautifulSoup(self.sourcecode, 'html.parser')
         remove = soap.find_all(text=lambda text:isinstance(text, Comment))
 
+        ispassou = True
         # remove o código html comentado
         for removeitem in remove:
             removeitem.extract()
@@ -26,16 +27,25 @@ class Recommendation38:
         for inputverifica in soapfiltro.select('input'):
              if inputverifica['type'] == 'image':
                  if not inputverifica['alt']:
-                     pass # erro
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, inputverifica, 3))
+                    ispassou = False
 
              if inputverifica['type'] == 'reset':
                  if not inputverifica['value']:
-                    pass # erro
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, inputverifica, 3))
+                    ispassou = False
 
              if inputverifica['type'] == 'button':
                  if not inputverifica['value']:
-                    pass # erro
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, inputverifica, 3))
+                    ispassou = False
 
              if inputverifica['type'] == 'submit':
                  if not inputverifica['value']:
-                    pass # erro
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, inputverifica, 3))
+                    ispassou = False
+
+        if ispassou:
+            self.occurrences.add(OccurrenceInterface(self.rec, 0, "", 3))
+
+        return self.occurrences.list_of_occurrences

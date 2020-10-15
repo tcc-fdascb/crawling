@@ -3,6 +3,7 @@ recommendation,type_feedback,code_message,message
 1,1,1,O documento HTML contêm erros que devem ser corrigidos. O documento é inválido.
 1,0,2,A folha de estilo foi validada com sucesso.
 1,1,3,A folha de estilo contêm erros que devem ser corrigidos. A folha de estilo é inválida.
+3,0,0,Passou por todos os nossos testes.
 6,0,0,Passou por todos os nossos testes.
 6,1,1,Não foi identificado um atalho para o conteúdo principal.
 6,1,2,Há atalho para o conteúdo principal no entanto não pode ser lido por leitores pois ele ou um dos seus elementos pai contêm regras CSS impeditivas.
@@ -24,8 +25,11 @@ recommendation,type_feedback,code_message,message
 20,1,6,Há outras imagens com a mesma descrição.
 23,0,0,Tabela com descrição.
 23,1,1,Tabela sem descrição.
+26,0,0,Passou por todos os nossos testes.
+26,1,1,Não tem o atributo Title na tag Abbr.
 31,0,0,Pagina em PT-BR.
 31,1,1,Pagina em outro idioma
 33,2,0,Atenção possui presença de vídeo.
 38,0,0,Passou por todos os nossos testes.
 38,1,1,Botão sem descrição.
+44,1,1,Não possui tag fieldset

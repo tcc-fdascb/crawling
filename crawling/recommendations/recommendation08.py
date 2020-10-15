@@ -16,14 +16,15 @@ class Recommendation08:
         self.occurrences = Occurrences()
 
     def avaliacao(self):
-        ispassou = True
-        soap = BeautifulSoup(self.sourcecode, 'html.parser')
+        # ispassou = True
+        soap = BeautifulSoup("<p><a id=1 ></a> <br> <a id=2> </a></p>", 'html.parser')
         remove = soap.find_all(text=lambda text: isinstance(text, Comment))
         for removeitem in remove:  # remove o código html comentado
             removeitem.extract()
         soapfiltro = BeautifulSoup(soap.prettify(), 'html.parser')
 
         for paragraph in soap.find_all('p'):
+            ispassou = True
             tags_a = paragraph.find_all('a')
             if len(tags_a) > 1:
                 par = str(paragraph).lower()
@@ -43,14 +44,15 @@ class Recommendation08:
                     # dispara erro
                     self.occurrences.add(OccurrenceInterface(self.rec, 1, par, 1))
                     ispassou = False
-                if str(
-                        "</a>\n<a") in paragrafosemespaco:  # verifica se tem quebra de linha entra o fechamento e abertura de outra tag a
+                if str("</a>\n<a") in paragrafosemespaco:
+                    # verifica se tem quebra de linha entra o fechamento e abertura de outra tag a
                     self.occurrences.add(OccurrenceInterface(self.rec, 1, par, 1))
                     ispassou = False
                 if "</a><br>\n<a" in paragrafosemespaco:
                     self.occurrences.add(OccurrenceInterface(self.rec, 1, par, 1))
                     ispassou = False
-        if ispassou:
-            self.occurrences.add(OccurrenceInterface(self.rec, 0,"", 2))
+
+                if ispassou:
+                    self.occurrences.add(OccurrenceInterface(self.rec, 0,par, 2))
 
         return self.occurrences.list_of_occurrences
