@@ -1,7 +1,7 @@
 import pandas as pd
 
 from crawling.evaluation import Evaluation
-from crawling.scores import Scores
+from crawling.mining import Mining
 from crawling.reports import Reports
 
 
@@ -26,8 +26,8 @@ for occ in occurrences_by_cities:
     occurrences += occ
 
 # Cálcula os score com base nas ocorrências
-scores = Scores(occurrences, cities)
-scores.calculate()
+mining = Mining(occurrences, cities)
+mining.extractor()
 
 # Gera relatórios
 reports = Reports(occurrences, cities)

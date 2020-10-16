@@ -1,37 +1,39 @@
-class Scores:
+class Mining:
     """
-    Análisa as ocorrências, calcula o score de acessibilidade e guarda os resultados.
+    Análisa as ocorrências, extrai informações, calcula o índice de acessibilidade e guarda os resultados.
     """
     def __init__(self, occorrences, cities):
-        self.occorrences = occorrences
+        self.occurrences = occorrences
         self.cities = cities
 
-    def calculate(self):
+    def extractor(self):
         print('Iniciando cálculo com base nas ocorrências.')
-        amount = {}
+        information = {}
 
-        if not self.occorrences:
-            print('<class Scores> Lista de ocorrências vazia.')
+        if not self.occurrences:
+            print('<class Mining> Lista de ocorrências vazia.')
 
-        for occorrence in self.occorrences:
-            if occorrence['city_id'] in amount.keys():
-                amount[occorrence['city_id']] = extract_info(occorrence, amount[occorrence['city_id']])
+        for occurrence in self.occurrences:
+            if occurrence['city_id'] in information.keys():
+                information[occurrence['city_id']] = identify_info(occurrence, information[occurrence['city_id']])
             else:
-                amount[occorrence['city_id']] = extract_info(occorrence)
+                information[occurrence['city_id']] = identify_info(occurrence)
 
-        for k in amount.keys():
+        for k in information.keys():
             for c in self.cities:
                 city = self.cities[c]
                 if k == city['_id']:
-                    city['wab'] = round(calculate_wab(amount[k]['errors'], amount[k]['warnings']), 2)
-                    city['errors'] = sum(amount[k]['errors'])
-                    city['warnings'] = sum(amount[k]['warnings'])
-                    city['successes'] = amount[k]['successes']
+                    city['cms'] = information[k]['cms']
+                    city['wab'] = round(calculate_wab(information[k]['errors'], information[k]['warnings']), 2)
+                    city['errors'] = sum(information[k]['errors'])
+                    city['warnings'] = sum(information[k]['warnings'])
+                    city['successes'] = information[k]['successes']
 
 
 def calculate_wab(es, ws):
     """
-    Score WAB (Web Accessibility Barrier)
+    Índice de Acessibilidade
+    Fórmula WAB (Web Accessibility Barrier)
 
     fórmula: p * ea * (e / a) * w
         p - quantidade de páginas
@@ -53,9 +55,9 @@ def calculate_wab(es, ws):
     return sum(parcials) / len(parcials)
 
 
-def extract_info(oc, dc=None):
+def identify_info(oc, dc=None):
     if dc is None:
-        dc = {'errors': [0, 0, 0], 'warnings': [0, 0, 0], 'successes': 0}
+        dc = {'cms': '', 'errors': [0, 0, 0], 'warnings': [0, 0, 0], 'successes': 0}
 
     if oc['peso'] == 1:
         if oc['type_code'] == 1:
@@ -84,7 +86,8 @@ def extract_info(oc, dc=None):
             dc['warnings'][2] = w + 1
         elif oc['type_code'] == 0:
             dc['successes'] = dc['successes'] + 1
-    else:
-        print('Ops')
+
+    if oc['tag'].startswith('CMS='):
+        dc['cms'] = oc['tag'].replace('CMS=', '')
 
     return dc
