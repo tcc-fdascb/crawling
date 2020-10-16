@@ -85,6 +85,8 @@ class Evaluation(Thread):
         print(f'{self.city["city_name"]}: Validação das recomendações.')
 
         if self.sourcecode is not None:
+            rec00_cms = Recommendation00(self.city['url']).identify()
+            self.occurrences.add({self.city['_id']: rec00_cms})
             rec01_html = Recommendation01(self.sourcecode, url=self.city['url']).validar_css()
             self.occurrences.add({self.city['_id']: rec01_html})
             rec01_css = Recommendation01(self.sourcecode, url=self.city['url']).validar_html()

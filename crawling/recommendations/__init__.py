@@ -1,3 +1,4 @@
+from .recommendation00 import Recommendation00
 from .recommendation01 import Recommendation01
 from .recommendation03 import Recommendation03
 from .recommendation06 import Recommendation06

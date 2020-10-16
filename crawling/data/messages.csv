@@ -1,4 +1,6 @@
 recommendation,type_feedback,code_message,message
+0,0,0,Não foi identificado o uso de CMS.
+0,0,1,Foi identificado o uso de CMS.
 1,0,0,O documento HTML foi validado com sucesso.
 1,1,1,O documento HTML contêm erros que devem ser corrigidos. O documento é inválido.
 1,0,2,A folha de estilo foi validada com sucesso.
@@ -28,8 +30,8 @@ recommendation,type_feedback,code_message,message
 26,0,0,Passou por todos os nossos testes.
 26,1,1,Não tem o atributo Title na tag Abbr.
 31,0,0,Pagina em PT-BR.
-31,1,1,Pagina em outro idioma
+31,1,1,Pagina em outro idioma.
 33,2,0,Atenção possui presença de vídeo.
 38,0,0,Passou por todos os nossos testes.
 38,1,1,Botão sem descrição.
-44,1,1,Não possui tag fieldset
+44,1,1,Não possui tag fieldset.
