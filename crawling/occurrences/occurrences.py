@@ -26,20 +26,21 @@ class Occurrences:
         list_of_dict = []
         for occurrence in self.list_of_occurrences:
             for key in occurrence.keys():
-                for value in occurrence.get(key):
-                    message = translate_message(messages, value.recommendation, value.code_message)
-                    message = message if message else {'type_code': '', 'type': '', 'message': ''}
-                    tag = str(value.tag).replace('\n', '')
-                    list_of_dict.append({
-                        'city_id': key,
-                        'recommendation': value.recommendation,
-                        'type_code': message['type_code'],
-                        'type': message['type'],
-                        'message': message['message'],
-                        'message_code': value.code_message,
-                        'tag': tag,
-                        'peso': value.peso
-                    })
+                if occurrence[key] is not None:
+                    for value in occurrence.get(key):
+                        message = translate_message(messages, value.recommendation, value.code_message)
+                        message = message if message else {'type_code': '', 'type': '', 'message': ''}
+                        tag = str(value.tag).replace('\n', '')
+                        list_of_dict.append({
+                            'city_id': key,
+                            'recommendation': value.recommendation,
+                            'type_code': message['type_code'],
+                            'type': message['type'],
+                            'message': message['message'],
+                            'message_code': value.code_message,
+                            'tag': tag,
+                            'peso': value.peso
+                        })
         return list_of_dict
 
     def show_log(self):
