@@ -61,36 +61,17 @@ def identify_info(oc, dc=None):
     if dc is None:
         dc = {'cms': '', 'errors': [0, 0, 0], 'warnings': [0, 0, 0], 'successes': [0, 0, 0]}
 
-    if oc['peso'] == 1:
-        if oc['type_code'] == 1:
-            e = dc['errors'][0]
-            dc['errors'][0] = e + 1
-        elif oc['type_code'] == 2:
-            w = dc['warnings'][0]
-            dc['warnings'][0] = w + 1
-        elif oc['type_code'] == 0:
-            s = dc['successes'][0]
-            dc['successes'][0] = s + 1
-    elif oc['peso'] == 2:
-        if oc['type_code'] == 1:
-            e = dc['errors'][1]
-            dc['errors'][1] = e + 1
-        elif oc['type_code'] == 2:
-            w = dc['warnings'][1]
-            dc['warnings'][1] = w + 1
-        elif oc['type_code'] == 0:
-            s = dc['successes'][1]
-            dc['successes'][1] = s + 1
-    elif oc['peso'] == 3:
-        if oc['type_code'] == 1:
-            e = dc['errors'][2]
-            dc['errors'][2] = e + 1
-        elif oc['type_code'] == 2:
-            w = dc['warnings'][2]
-            dc['warnings'][2] = w + 1
-        elif oc['type_code'] == 0:
-            s = dc['successes'][2]
-            dc['successes'][2] = s + 1
+    for i in range(3):
+        if oc['peso'] == i + 1:
+            if oc['type_code'] == 1:
+                e = dc['errors'][i]
+                dc['errors'][i] = e + 1
+            elif oc['type_code'] == 2:
+                w = dc['warnings'][i]
+                dc['warnings'][i] = w + 1
+            elif oc['type_code'] == 0:
+                s = dc['successes'][i]
+                dc['successes'][i] = s + 1
 
     if oc['tag'].startswith('CMS='):
         dc['cms'] = oc['tag'].replace('CMS=', '')
