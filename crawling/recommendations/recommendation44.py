@@ -21,11 +21,11 @@ class Recommendation44:
         for removeitem in remove:  # remove o código html comentado
             removeitem.extract()
         if not soap.select('form fieldset'):
-            self.occurrences.add(OccurrenceInterface(self.rec, 1, "", 2))
+            self.occurrences.add(OccurrenceInterface(self.rec, 1, "", 1))
             ispassou = False
 
 
         if ispassou:
-            self.occurrences.add(OccurrenceInterface(self.rec, 0, "", 2))
+            self.occurrences.add(OccurrenceInterface(self.rec, 0, "", 1))
 
         return self.occurrences.list_of_occurrences

@@ -27,6 +27,9 @@ recommendation,type_feedback,code_message,message
 20,1,6,Há outras imagens com a mesma descrição.
 23,0,0,Tabela com descrição.
 23,1,1,Tabela sem descrição.
+24,2,1,Tag tbody não vem antes da tag tfoot.
+24,2,2,Não possui algum atributo ("id" ou "headers" ou "scope" ou "axis") de associação.
+24,0,0,Passou por todos os nossos testes.
 26,0,0,Passou por todos os nossos testes.
 26,1,1,Não tem o atributo Title na tag Abbr.
 31,0,0,Pagina em PT-BR.
@@ -34,4 +37,6 @@ recommendation,type_feedback,code_message,message
 33,2,0,Atenção possui presença de vídeo.
 38,0,0,Passou por todos os nossos testes.
 38,1,1,Botão sem descrição.
+39,1,1,Campo sem Label associado.
+39,0,0,Passou por todos os nossos testes.
 44,1,1,Não possui tag fieldset.
