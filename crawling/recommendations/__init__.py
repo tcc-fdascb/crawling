@@ -6,11 +6,20 @@ from .recommendation07 import Recommendation07
 from .recommendation08 import Recommendation08
 from .recommendation09 import Recommendation09
 from .recommendation16 import Recommendation16
+from .recommendation17 import Recommendation17
+from .recommendation19 import Recommendation19
 from .recommendation20 import Recommendation20
 from .recommendation23 import Recommendation23
 from .recommendation24 import Recommendation24
 from .recommendation26 import Recommendation26
+from .recommendation31 import Recommendation31
 from .recommendation33 import Recommendation33
+from .recommendation34 import Recommendation34
+from .recommendation36 import Recommendation36
 from .recommendation38 import Recommendation38
+<<<<<<< HEAD
 from .recommendation39 import Recommendation39
 from .recommendation44 import Recommendation44
+=======
+from .recommendation44 import Recommendation44
+>>>>>>> 6950d6ee6012f8f143e6d5f01f2420be3abf5011
