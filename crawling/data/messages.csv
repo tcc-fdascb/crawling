@@ -16,8 +16,11 @@ recommendation,type_feedback,code_message,message
 8,0,0,Passou por todos os nossos testes.
 8,1,1,Há links adjacentes sem nenhum tipo de separação.
 8,1,2,Há links adjacentes separados por símbolos.
-19,0,0,Passou por todos os nossos testes.
-19,1,1,Pode abrir Novas Instâncias
+9,0,0,Passou por todos os nossos testes.
+9,1,1,Pode abrir Novas Instâncias
+16,0,0,Pagina em PT-BR.
+16,1,1,Pagina em outro idioma.
+19,2,0,Descrição de links.
 20,0,0,Passou por todos os nossos testes.
 20,1,1,Imagem sem o atributo alt.
 20,2,2,Imagem com o atributo alt vazio caracteriza uma imagem decorativa.
@@ -29,9 +32,11 @@ recommendation,type_feedback,code_message,message
 23,1,1,Tabela sem descrição.
 26,0,0,Passou por todos os nossos testes.
 26,1,1,Não tem o atributo Title na tag Abbr.
-31,0,0,Pagina em PT-BR.
-31,1,1,Pagina em outro idioma.
+31,2,0,Dividido em áreas de informação
 33,2,0,Atenção possui presença de vídeo.
+36,2,0,Possui controle de audio.
 38,0,0,Passou por todos os nossos testes.
 38,1,1,Botão sem descrição.
+38,1,1,Botão sem descrição.
 44,1,1,Não possui tag fieldset.
+
