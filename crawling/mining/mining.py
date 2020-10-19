@@ -24,13 +24,13 @@ class Mining:
                 city = self.cities[c]
                 if k == city['_id']:
                     city['cms'] = info[k]['cms']
-                    city['ia'] = calculate_wab(info[k]['errors'], info[k]['warnings'], info[k]['successes'])
+                    city['ia'] = calculate_ia(info[k]['errors'], info[k]['warnings'], info[k]['successes'])
                     city['errors'] = sum(info[k]['errors'])
                     city['warnings'] = sum(info[k]['warnings'])
                     city['successes'] = sum(info[k]['successes'])
 
 
-def calculate_wab(errors, warnings, successes):
+def calculate_ia(errors, warnings, successes):
     """
     Cálcula o Índice de Acessibilidade
 
@@ -80,5 +80,5 @@ def identify_info(oc, dc=None):
 
 
 if __name__ == '__main__':
-    print(calculate_wab([0, 0, 0], [30, 98, 300], [30, 98, 300]))
-    print(calculate_wab([27, 95, 388], [1, 2, 2], [2, 1, 10]))
+    print(calculate_ia([0, 0, 0], [30, 98, 300], [30, 98, 300]))
+    print(calculate_ia([27, 95, 388], [1, 2, 2], [2, 1, 10]))
