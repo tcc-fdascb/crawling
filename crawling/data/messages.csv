@@ -35,6 +35,7 @@ recommendation,type_feedback,code_message,message
 33,2,0,Atenção possui presença de vídeo.
 36,2,0,Possui controle de audio.
 38,0,0,Passou por todos os nossos testes.
-38,1,1,Botão sem descrição.
+38,1,1,Botão sem descrição ou identificação.
+38,2,2,O elemento input não tem o atributo type.
 44,1,1,Não possui tag fieldset.
 
