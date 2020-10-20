@@ -40,6 +40,7 @@ recommendation,type_feedback,code_message,message
 38,0,0,Passou por todos os nossos testes.
 38,1,1,Botão sem descrição ou identificação.
 38,2,2,O elemento input não tem o atributo type.
-39,1,1,Campo sem Label associado.
 39,0,0,Passou por todos os nossos testes.
+39,1,1,Não foi identificado um label associado ao campo.
+39,1,2,Campo sem identificação e label associado.
 44,1,1,Não possui tag fieldset.

@@ -16,35 +16,27 @@ class Recommendation39:
 
     def avaliacao(self):
         soap = BeautifulSoup(self.sourcecode, 'html.parser')
-        ispassou = True
-        labelscoll = soap.findAll('label')
-        inputscoll = soap.findAll('input')
-        selectscoll = soap.findAll('select')
-        textareacoll = soap.findAll('textarea')
+        fields = []
 
-        for label in labelscoll:
-            idlabel = str(label['id']).lower().strip()
-            if not inputscoll:
-                for item in inputscoll:
-                    id = str(item['id']).lower().strip()
-                    if id != idlabel:
-                        self.occurrences.add(OccurrenceInterface(self.rec, 1, item, 3))
-                        ispassou = False
+        for field in soap.find_all('input'):
+            field_type = field.get('type')
+            if field_type == 'text' or \
+                    field_type == 'file' or \
+                    field_type == 'password' or \
+                    field_type == 'radio' or \
+                    field_type == 'checkbox':
+                fields.append(field)
 
-            if not selectscoll:
-                for item in selectscoll:
-                    id = str(item['id']).lower().strip()
-                    if id != idlabel:
-                        self.occurrences.add(OccurrenceInterface(self.rec, 1, item, 3))
-                        ispassou = False
+        for field in soap.find_all('textarea') + soap.find_all('select'):
+            fields.append(field)
 
-            if not textareacoll:
-                for item in textareacoll:
-                    id = str(item['id']).lower().strip()
-                    if id != idlabel:
-                        self.occurrences.add(OccurrenceInterface(self.rec, 1, item, 3))
-                        ispassou = False
-        if ispassou:
-            self.occurrences.add(OccurrenceInterface(self.rec, 0, "", 3))
+        for field in fields:
+            if field.get('id'):
+                if soap.select(f'label[for="{field.get("id")}"]'):
+                    self.occurrences.add(OccurrenceInterface(self.rec, 0, field, 3))
+                else:
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, field, 3))
+            else:
+                self.occurrences.add(OccurrenceInterface(self.rec, 2, field, 3))
 
         return self.occurrences.list_of_occurrences
