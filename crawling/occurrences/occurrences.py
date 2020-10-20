@@ -30,7 +30,7 @@ class Occurrences:
                     for value in occurrence.get(key):
                         message = translate_message(messages, value.recommendation, value.code_message)
                         message = message if message else {'type_code': '', 'type': '', 'message': ''}
-                        tag = str(value.tag).replace('\n', '')
+                        tag = str(value.tag).replace('\n', '').replace('[', '').replace(']', '')
                         list_of_dict.append({
                             'city_id': key,
                             'recommendation': value.recommendation,
