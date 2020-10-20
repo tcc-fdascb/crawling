@@ -36,7 +36,7 @@ class Evaluation(Thread):
 
             city_url = self.city['url']
             city_url_robots = city_url + 'robots.txt'
-            robotstxt = requests.get(city_url_robots, timeout=30)
+            robotstxt = requests.get(city_url_robots, timeout=30, headers={'user-agent': 'uscs/0.0.1'})
 
             if robotstxt.status_code == 200:
                 self.city['has_robotstxt'] = True
@@ -67,7 +67,7 @@ class Evaluation(Thread):
         print(f'{self.city["city_name"]}: Crawling do sourcecode.')
 
         try:
-            self.sourcecode = requests.get(self.city['url'], timeout=30)
+            self.sourcecode = requests.get(self.city['url'], timeout=30, headers={'user-agent': 'uscs/0.0.1'})
 
             if self.sourcecode.status_code == 200:
                 return self.sourcecode.content
@@ -93,16 +93,18 @@ class Evaluation(Thread):
             self.occurrences.add({self.city['_id']: rec01_css})
             rec06 = Recommendation06(self.sourcecode).avaliacao()
             self.occurrences.add({self.city['_id']: rec06})
+            rec07 = Recommendation07(self.sourcecode).avaliacao()
+            self.occurrences.add({self.city['_id']: rec07})
             rec20 = Recommendation20(self.sourcecode).avaliacao()
             self.occurrences.add({self.city['_id']: rec20})
-            rec09 = Recommendation09(self.sourcecode).avaliacao()
-            self.occurrences.add({self.city['_id']: rec09})
-            rec16 = Recommendation16(self.sourcecode).avaliacao()
-            self.occurrences.add({self.city['_id']: rec16})
-            rec23 = Recommendation23(self.sourcecode).avaliacao()
-            self.occurrences.add({self.city['_id']: rec23})
-            rec33 = Recommendation33(self.sourcecode).avaliacao()
-            self.occurrences.add({self.city['_id']: rec33})
+            # rec09 = Recommendation09(self.sourcecode).avaliacao()
+            # self.occurrences.add({self.city['_id']: rec09})
+            # rec16 = Recommendation16(self.sourcecode).avaliacao()
+            # self.occurrences.add({self.city['_id']: rec16})
+            # rec23 = Recommendation23(self.sourcecode).avaliacao()
+            # self.occurrences.add({self.city['_id']: rec23})
+            # rec33 = Recommendation33(self.sourcecode).avaliacao()
+            # self.occurrences.add({self.city['_id']: rec33})
 
     def get_occurrences(self):
         return self.occurrences.convert()
