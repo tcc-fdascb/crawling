@@ -15,7 +15,6 @@ recommendation,type_feedback,code_message,message
 7,1,3,Possivelmente o conteúdo da página está em outro endereço.
 8,0,0,Passou por todos os nossos testes.
 8,1,1,Há links adjacentes sem nenhum tipo de separação.
-8,1,2,Há links adjacentes separados por símbolos.
 9,0,0,Passou por todos os nossos testes.
 9,1,1,Pode abrir Novas Instâncias
 16,0,0,Pagina em PT-BR.
