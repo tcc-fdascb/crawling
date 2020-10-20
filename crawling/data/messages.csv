@@ -15,7 +15,6 @@ recommendation,type_feedback,code_message,message
 7,1,3,Possivelmente o conteúdo da página está em outro endereço.
 8,0,0,Passou por todos os nossos testes.
 8,1,1,Há links adjacentes sem nenhum tipo de separação.
-8,1,2,Há links adjacentes separados por símbolos.
 9,0,0,Passou por todos os nossos testes.
 9,1,1,Pode abrir Novas Instâncias
 16,0,0,Pagina em PT-BR.
@@ -39,10 +38,11 @@ recommendation,type_feedback,code_message,message
 33,2,0,Atenção possui presença de vídeo.
 36,2,0,Possui controle de audio.
 38,0,0,Passou por todos os nossos testes.
-38,1,1,Botão sem descrição.
-<<<<<<< HEAD
+38,1,1,Botão sem descrição ou identificação.
+38,2,2,O elemento input não tem o atributo type.
 39,1,1,Campo sem Label associado.
 39,0,0,Passou por todos os nossos testes.
+<<<<<<< HEAD
 44,1,1,Não possui tag fieldset.
 44,1,2,Não possui tag Legend dentro da tag fieldset.
 44,1,3,Não possui tag optgroup dentro da tag select.
@@ -52,3 +52,6 @@ recommendation,type_feedback,code_message,message
 
 
 >>>>>>> 6950d6ee6012f8f143e6d5f01f2420be3abf5011
+=======
+44,1,1,Não possui tag fieldset.
+>>>>>>> 29755f7ef1c96f6369ac33ffa2cebb53c97b6c40
