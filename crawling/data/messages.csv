@@ -29,9 +29,13 @@ recommendation,type_feedback,code_message,message
 20,1,6,Há outras imagens com a mesma descrição.
 23,0,0,Tabela com descrição.
 23,1,1,Tabela sem descrição.
-24,2,1,Tag tbody não vem antes da tag tfoot.
-24,2,2,Não possui algum atributo ("id" ou "headers" ou "scope" ou "axis") de associação.
 24,0,0,Passou por todos os nossos testes.
+24,2,1,As células da tabela deveriam ter uma relação entre atributos id e headers.
+24,2,2,Nem todos os atributos headers das células da tabela tem um id correspondente.
+24,2,3,As células da tabela apresentam duplicidade nos valores dos atributos id.
+24,2,4,Todos os elementos th deveriam ter o atributo scope.
+24,2,5,Há elementos th sem o atributo scope.
+24,2,6,Há elementos th com valores inválidos no atributo scope.
 26,0,0,Passou por todos os nossos testes.
 26,1,1,Não tem o atributo Title na tag Abbr.
 31,2,0,Dividido em áreas de informação
@@ -40,18 +44,11 @@ recommendation,type_feedback,code_message,message
 38,0,0,Passou por todos os nossos testes.
 38,1,1,Botão sem descrição ou identificação.
 38,2,2,O elemento input não tem o atributo type.
-39,1,1,Campo sem Label associado.
 39,0,0,Passou por todos os nossos testes.
-<<<<<<< HEAD
+39,1,1,Não foi identificado um label associado ao campo.
+39,1,2,Campo sem identificação e label associado.
+44,0,0,Passou pelos nossos testes.
 44,1,1,Não possui tag fieldset.
 44,1,2,Não possui tag Legend dentro da tag fieldset.
 44,1,3,Não possui tag optgroup dentro da tag select.
 44,1,4,Não possui atributo label na tag optgroup.
-44,0,0,Passou pelos nossos testes.
-=======
-
-
->>>>>>> 6950d6ee6012f8f143e6d5f01f2420be3abf5011
-=======
-44,1,1,Não possui tag fieldset.
->>>>>>> 29755f7ef1c96f6369ac33ffa2cebb53c97b6c40
