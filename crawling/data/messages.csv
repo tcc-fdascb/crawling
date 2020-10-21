@@ -29,9 +29,13 @@ recommendation,type_feedback,code_message,message
 20,1,6,Há outras imagens com a mesma descrição.
 23,0,0,Tabela com descrição.
 23,1,1,Tabela sem descrição.
-24,2,1,Tag tbody não vem antes da tag tfoot.
-24,2,2,Não possui algum atributo ("id" ou "headers" ou "scope" ou "axis") de associação.
 24,0,0,Passou por todos os nossos testes.
+24,2,1,As células da tabela deveriam ter uma relação entre atributos id e headers.
+24,2,2,Nem todos os atributos headers das células da tabela tem um id correspondente.
+24,2,3,As células da tabela apresentam duplicidade nos valores dos atributos id.
+24,2,4,Todos os elementos th deveriam ter o atributo scope.
+24,2,5,Há elementos th sem o atributo scope.
+24,2,6,Há elementos th com valores inválidos no atributo scope.
 26,0,0,Passou por todos os nossos testes.
 26,1,1,Não tem o atributo Title na tag Abbr.
 31,2,0,Dividido em áreas de informação

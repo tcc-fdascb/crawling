@@ -1,13 +1,12 @@
 from bs4 import BeautifulSoup
+
 from ..occurrences.occurrences import Occurrences
 from ..occurrences.occurrence_interface import OccurrenceInterface
+
 
 class Recommendation24:
     """
     Recomendação 24: Associar células de dados às células de cabeçalho
-
-
-    Peso: 2
     """
 
     def __init__(self, sourcecode):
@@ -15,38 +14,64 @@ class Recommendation24:
         self.occurrences = Occurrences()
         self.sourcecode = sourcecode
 
-
     def avaliacao(self):
-        ispassou = True
-        soap = BeautifulSoup(self.sourcecode,'html.parser')
-        table = soap.findAll('table')
-        for tableitem in table:
-            if tableitem.find_all('thead') and tableitem.find_all('tbody'):
-                if not tableitem.find('tbody').find_previous_sibling('tfoot'):
-                    err = tableitem.find('tbody')
-                    self.occurrences.add(OccurrenceInterface(self.rec, 1, err, 2))
+        soap = BeautifulSoup(self.sourcecode, 'html.parser')
+        tables = soap.find_all('table')
+
+        for table in tables:
+            ispassou = True
+            th_cels = table.find_all('th')
+            td_cels = table.find_all('td')
+            th_cels_ids = []
+            td_cels_headers = []
+            th_cels_scope = []
+
+            for th_cel in th_cels:
+                if th_cel.get('id') is not None:
+                    th_cels_ids.append(th_cel.get('id'))
+
+            for td_cel in td_cels:
+                temp = []
+                if td_cel.get('headers') is not None:
+                    temp.append(td_cel.get('headers'))
+                    for header in temp:
+                        for i in header:
+                            td_cels_headers.append(i)
+
+            for th_cel in th_cels:
+                if th_cel.get('scope') is not None:
+                    th_cels_scope.append(th_cel.get('scope'))
+
+            if th_cels_ids and td_cels_headers:
+                if not all(i in th_cels_ids for i in td_cels_headers):
                     ispassou = False
+                    self.occurrences.add(OccurrenceInterface(self.rec, 2, table, 2))
+
+                if any(th_cels_ids.count(element) > 1 for element in th_cels_ids):
+                    ispassou = False
+                    self.occurrences.add(OccurrenceInterface(self.rec, 3, table, 2))
             else:
-                for item in tableitem.find_all('td'):
-                    # if item['id'] or item['headers'] or item['scope'] or item['axis']:
-                    attr = item.attrs
-                    if 'id' in attr or 'headers' in attr or 'scope' in attr or 'axis' in attr:
-                        pass
-                    else:
-                        ispassou = False
-                        self.occurrences.add(OccurrenceInterface(self.rec, 2, item, 2))
+                ispassou = False
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, table, 2))
 
-                for item in tableitem.findAll('th'):
-                    # if item['id'] or item['headers'] or item['scope'] or item['axis']:
-                    attr = item.attrs
-                    if 'id' in attr or 'headers' in attr or 'scope' in attr or 'axis' in attr:
-                        pass
-                    else:
-                        self.occurrences.add(OccurrenceInterface(self.rec, 2, item, 2))
-                        ispassou = False
+            if th_cels_scope:
+                if len(th_cels_scope) != len(th_cels):
+                    ispassou = False
+                    self.occurrences.add(OccurrenceInterface(self.rec, 5, table, 2))
 
+                has_invalid_scope = False
+                for scope in th_cels_scope:
+                    if scope not in ['col', 'row', 'rowgroup', 'colgroup']:
+                        has_invalid_scope = True
 
-        if ispassou:
-            self.occurrences.add(OccurrenceInterface(self.rec, 0, "", 2))
+                if has_invalid_scope:
+                    ispassou = False
+                    self.occurrences.add(OccurrenceInterface(self.rec, 6, table, 2))
+            else:
+                ispassou = False
+                self.occurrences.add(OccurrenceInterface(self.rec, 4, table, 2))
+
+            if ispassou:
+                self.occurrences.add(OccurrenceInterface(self.rec, 0, table, 2))
 
         return self.occurrences.list_of_occurrences
