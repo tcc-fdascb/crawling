@@ -37,7 +37,7 @@ recommendation,type_feedback,code_message,message
 24,2,5,Há elementos th sem o atributo scope.
 24,2,6,Há elementos th com valores inválidos no atributo scope.
 26,0,0,Passou por todos os nossos testes.
-26,1,1,Não tem o atributo Title na tag Abbr.
+26,1,1,O elemento abbr não possui atributo title.
 31,2,0,Dividido em áreas de informação
 33,2,0,Atenção possui presença de vídeo.
 36,2,0,Possui controle de audio.

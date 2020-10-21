@@ -17,9 +17,5 @@ from .recommendation33 import Recommendation33
 from .recommendation34 import Recommendation34
 from .recommendation36 import Recommendation36
 from .recommendation38 import Recommendation38
-<<<<<<< HEAD
 from .recommendation39 import Recommendation39
 from .recommendation44 import Recommendation44
-=======
-from .recommendation44 import Recommendation44
->>>>>>> 6950d6ee6012f8f143e6d5f01f2420be3abf5011
