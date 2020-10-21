@@ -26,35 +26,37 @@ class Recommendation06:
     def avaliacao(self):
         soap = BeautifulSoup(self.sourcecode, 'html.parser')
         links = soap.find_all('a')
-        first_link = links[0]
-        has_error_or_warning = False
 
-        if first_link.has_attr('href') and first_link['href'][0] == '#'\
-                and first_link['href'] != '#' and not is_back_to_top(first_link):
-            link_has_bad_style = False
-            parent_has_bad_style = False
+        if links:
+            first_link = links[0]
+            has_error_or_warning = False
 
-            if first_link.has_attr('style') and has_bad_style(first_link['style']):
-                link_has_bad_style = True
+            if first_link.has_attr('href') and first_link['href'][0] == '#'\
+                    and first_link['href'] != '#' and not is_back_to_top(first_link):
+                link_has_bad_style = False
+                parent_has_bad_style = False
 
-            for parent in first_link.parents:
-                if parent.name != 'body':
-                    if parent.has_attr('style') and has_bad_style(parent['style']):
-                        parent_has_bad_style = True
+                if first_link.has_attr('style') and has_bad_style(first_link['style']):
+                    link_has_bad_style = True
+
+                for parent in first_link.parents:
+                    if parent.name != 'body':
+                        if parent.has_attr('style') and has_bad_style(parent['style']):
+                            parent_has_bad_style = True
+                            break
+                    else:
                         break
-                else:
-                    break
 
-            if link_has_bad_style or parent_has_bad_style:
-                self.occurrences.add(OccurrenceInterface(self.rec, 2, first_link, 1))
+                if link_has_bad_style or parent_has_bad_style:
+                    self.occurrences.add(OccurrenceInterface(self.rec, 2, first_link, 1))
+                    has_error_or_warning = True
+            else:
+                self.occurrences.add(OccurrenceInterface(self.rec, 1, first_link, 1))
                 has_error_or_warning = True
-        else:
-            self.occurrences.add(OccurrenceInterface(self.rec, 1, first_link, 1))
-            has_error_or_warning = True
 
-        if not has_error_or_warning:
-            self.occurrences.add(OccurrenceInterface(self.rec, 0, first_link, 1))
-            pass
+            if not has_error_or_warning:
+                self.occurrences.add(OccurrenceInterface(self.rec, 0, first_link, 1))
+                pass
 
         return self.occurrences.list_of_occurrences
 
