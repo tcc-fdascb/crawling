@@ -63,6 +63,7 @@ class Recommendation24:
                 for scope in th_cels_scope:
                     if scope not in ['col', 'row', 'rowgroup', 'colgroup']:
                         has_invalid_scope = True
+                        break
 
                 if has_invalid_scope:
                     ispassou = False
