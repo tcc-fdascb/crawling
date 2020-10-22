@@ -6,6 +6,9 @@ recommendation,type_feedback,code_message,message
 1,0,2,A folha de estilo foi validada com sucesso.
 1,1,3,A folha de estilo contêm erros que devem ser corrigidos. A folha de estilo é inválida.
 3,0,0,Passou por todos os nossos testes.
+3,1,1,Os níveis de título não foram utilizados ou não foram utilizados corretamente.
+3,2,2,Foi utilizado somente o nível H1.
+3,1,3,A hierarquia dos níveis de título está incorreta.
 6,0,0,Passou por todos os nossos testes.
 6,1,1,Não foi identificado um atalho para o conteúdo principal.
 6,1,2,Há atalho para o conteúdo principal no entanto não pode ser lido por leitores pois ele ou um dos seus elementos pai contêm regras CSS impeditivas.

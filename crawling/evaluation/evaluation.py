@@ -91,6 +91,8 @@ class Evaluation(Thread):
             self.occurrences.add({self.city['_id']: rec01_html})
             rec01_css = Recommendation01(self.sourcecode, url=self.city['url']).validar_html()
             self.occurrences.add({self.city['_id']: rec01_css})
+            rec03 = Recommendation03(self.sourcecode).avaliacao()
+            self.occurrences.add({self.city['_id']: rec03})
             rec06 = Recommendation06(self.sourcecode).avaliacao()
             self.occurrences.add({self.city['_id']: rec06})
             rec07 = Recommendation07(self.sourcecode).avaliacao()
