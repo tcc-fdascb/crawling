@@ -99,6 +99,8 @@ class Evaluation(Thread):
             self.occurrences.add({self.city['_id']: rec07})
             rec08 = Recommendation08(self.sourcecode).avaliacao()
             self.occurrences.add({self.city['_id']: rec08})
+            rec19 = Recommendation19(self.sourcecode).avaliacao()
+            self.occurrences.add({self.city['_id']: rec19})
             rec20 = Recommendation20(self.sourcecode).avaliacao()
             self.occurrences.add({self.city['_id']: rec20})
             rec24 = Recommendation24(self.sourcecode).avaliacao()
