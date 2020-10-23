@@ -28,6 +28,9 @@ class Recommendation19:
                 contents = link.contents
                 href = link.get('href')
                 words = ['clique aqui', 'leia mais', 'veja aqui', 'veja mais', 'mais', 'saiba mais', 'acesse a lista']
+                file_extensions = ['mp3', 'ogg', '7z', 'rar', 'zip', 'csv', 'xml', 'exe', 'msi', 'apk',
+                                   'odp', 'pps', 'ppt', 'ods', 'xls', 'avi', 'mp4', 'mpg', 'mpeg', 'doc',
+                                   'odt', 'pdf']
 
                 if not contents and (not link.has_attr('title') or link.get('title') == ''):
                     is_pass = False
@@ -70,6 +73,12 @@ class Recommendation19:
                     self.occurrences.add(OccurrenceInterface(self.rec, 8, link, 2))
                 else:
                     all_hrefs.append(href)
+
+                if '.' in href:
+                    ext = href.split('.')
+                    if ext[1] in file_extensions and not ext[1] in str(contents):
+                        is_pass = False
+                        self.occurrences.add(OccurrenceInterface(self.rec, 9, link, 2))
 
                 if is_pass:
                     self.occurrences.add(OccurrenceInterface(self.rec, 0, link, 2))

@@ -31,6 +31,7 @@ recommendation,type_feedback,code_message,message
 19,1,6,A imagem deve ter descrição definida no atributo alt.
 19,2,7,Há links com conteúdo igual.
 19,2,8,Há links com destino igual.
+19,2,9,"É uma boa prática mencionar o formato de arquivo (.pdf, .doc, etc) de documentos para download."
 20,0,0,Passou por todos os nossos testes.
 20,1,1,Imagem sem o atributo alt.
 20,2,2,Imagem com o atributo alt vazio caracteriza uma imagem decorativa.
