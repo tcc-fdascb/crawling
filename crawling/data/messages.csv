@@ -24,14 +24,14 @@ recommendation,type_feedback,code_message,message
 16,1,1,Pagina em outro idioma.
 19,0,0,Passou por todos os nossos testes.
 19,1,1,Link vazio. Não possui conteúdo ou valor no atributo title.
-19,1,2,Link com descrição apenas no stributo title.
+19,1,2,Link com descrição apenas no atributo title.
 19,2,3,Link com dupla descrição. Possui conteúdo e valor no atributo title.
 19,1,4,Não é possível associar o valor do atributo title com o contexto do link.
 19,1,5,Não é possível associar a descrição com o contexto do link.
 19,1,6,A imagem deve ter descrição definida no atributo alt.
 19,2,7,Há links com conteúdo igual.
 19,2,8,Há links com destino igual.
-19,2,9,"É uma boa prática mencionar o formato de arquivo (.pdf, .doc, etc) de documentos para download."
+19,2,9,"É uma boa prática mencionar o formato de arquivo (.pdf, .doc, etc) de documentos para download na descrição."
 20,0,0,Passou por todos os nossos testes.
 20,1,1,Imagem sem o atributo alt.
 20,2,2,Imagem com o atributo alt vazio caracteriza uma imagem decorativa.
