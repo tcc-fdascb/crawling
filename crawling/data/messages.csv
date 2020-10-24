@@ -15,7 +15,7 @@ recommendation,type_feedback,code_message,message
 7,0,0,Passou por todos os nossos testes.
 7,1,1,Foram usadas elementos table para leiautar a página.
 7,1,2,Há elementos form dentro de elementos table.
-7,1,3,Possivelmente o conteúdo da página está em outro endereço.
+7,2,3,Possivelmente o conteúdo da página está em outro endereço.
 8,0,0,Passou por todos os nossos testes.
 8,1,1,Há links adjacentes sem nenhum tipo de separação.
 9,0,0,Passou por todos os nossos testes.
@@ -60,7 +60,7 @@ recommendation,type_feedback,code_message,message
 39,1,1,Não foi identificado um label associado ao campo.
 39,1,2,Campo sem identificação e label associado.
 44,0,0,O formulário passou pelos nossos testes.
-44,0,1,O elemento selecto passou pelos nossos testes.
+44,0,1,O elemento select passou pelos nossos testes.
 44,2,2,Não possui tag fieldset.
 44,2,3,Não possui tag Legend dentro da tag fieldset.
 44,2,4,Não possui tag optgroup dentro da tag select.
