@@ -20,6 +20,10 @@ recommendation,type_feedback,code_message,message
 8,1,1,Há links adjacentes sem nenhum tipo de separação.
 9,0,0,Passou por todos os nossos testes.
 9,1,1,Pode abrir Novas Instâncias
+11,0,0,Passou por todos os nossos testes.
+11,1,1,Os parâmetros do meta tipo refresh não estão em conformidade com o padrão.
+11,1,2,"Os parâmetros do meta tipo refresh, é preciso especificar em quanto tempo ocorrerá o redirecionamento."
+11,1,3,A URL informada no atributo content do meta tipo refresh está fora do padrão especificado ou não foi informada.
 16,0,0,Pagina em PT-BR.
 16,1,1,Pagina em outro idioma.
 19,0,0,Passou por todos os nossos testes.

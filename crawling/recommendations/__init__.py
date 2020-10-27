@@ -5,6 +5,7 @@ from .recommendation06 import Recommendation06
 from .recommendation07 import Recommendation07
 from .recommendation08 import Recommendation08
 from .recommendation09 import Recommendation09
+from .recommendation11 import Recommendation11
 from .recommendation16 import Recommendation16
 from .recommendation17 import Recommendation17
 from .recommendation19 import Recommendation19
