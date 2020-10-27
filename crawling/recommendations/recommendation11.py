@@ -26,7 +26,6 @@ class Recommendation11:
             content = meta.get('content')
 
             if value and value.lower() == 'refresh':
-                print('META SENDO ANALISADA >>>', meta)
                 if content and ';' in content:
                     content = str(content).lower().split(';')
                     if content[0] and content[0].isdigit() and int(content[0]) >= 0:
