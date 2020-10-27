@@ -74,7 +74,7 @@ class Recommendation19:
                 else:
                     all_hrefs.append(href)
 
-                if '.' in href:
+                if href and '.' in href:
                     ext = href.split('.')
                     if ext[1] in file_extensions and not ext[1] in str(contents):
                         is_pass = False
