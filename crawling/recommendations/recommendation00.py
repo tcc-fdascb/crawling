@@ -27,7 +27,7 @@ class Recommendation00:
 
                 return self.occurrences.list_of_occurrences
         except Exception as e:
-            print('ERROR', e)
+            print('REC00 - CMS: ERROR', e)
 
 
 if __name__ == '__main__':
