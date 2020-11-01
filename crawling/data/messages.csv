@@ -26,6 +26,9 @@ recommendation,type_feedback,code_message,message
 11,1,3,A URL informada no atributo content do meta tipo refresh está fora do padrão especificado ou não foi informada.
 16,0,0,Pagina em PT-BR.
 16,1,1,Pagina em outro idioma.
+17,0,0,Passou por todos os nossos testes.
+17,1,1,A página não tem título definido.
+17,1,2,A página tem mais de um título definido.
 19,0,0,Passou por todos os nossos testes.
 19,1,1,Link vazio. Não possui conteúdo ou valor no atributo title.
 19,1,2,Link com descrição apenas no atributo title.

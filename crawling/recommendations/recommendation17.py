@@ -6,8 +6,7 @@ from ..occurrences.occurrence_interface import OccurrenceInterface
 
 class Recommendation17:
     """
-    Recomendação 17: Nome da recomendação
-    - Título descritivo.
+    Recomendação 17: Oferecer um título descritivo e informativo à página
     """
 
     def __init__(self, sourcecode):
@@ -19,6 +18,11 @@ class Recommendation17:
         soap = BeautifulSoup(self.sourcecode, 'html.parser')
         titles = soap.find_all('title')
 
-        for title in titles:
-            self.occurrences.add(OccurrenceInterface(self.rec, 2, title, 2))
+        if titles:
+            if len(titles) > 1:
+                self.occurrences.add(OccurrenceInterface(self.rec, 2, titles, 2))
+            else:
+                self.occurrences.add(OccurrenceInterface(self.rec, 0, titles[0], 2))
+        else:
+            self.occurrences.add(OccurrenceInterface(self.rec, 1, '', 2))
         return self.occurrences.list_of_occurrences
