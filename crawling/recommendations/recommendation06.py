@@ -31,7 +31,7 @@ class Recommendation06:
             first_link = links[0]
             has_error_or_warning = False
 
-            if first_link.has_attr('href') and first_link['href'][0] == '#'\
+            if first_link.has_attr('href') and first_link['href'] == '#'\
                     and first_link['href'] != '#' and not is_back_to_top(first_link):
                 link_has_bad_style = False
                 parent_has_bad_style = False
