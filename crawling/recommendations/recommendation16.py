@@ -16,15 +16,15 @@ class Recommendation16:
 
     def avaliacao(self):
         soap = BeautifulSoup(self.sourcecode, 'html.parser')
-        lang = soap.find("html").get('lang')
+        html = soap.find("html")
 
-        if lang == 'pt-br':
-            self.occurrences.add(OccurrenceInterface(self.rec, 0, lang, 2))
-        elif lang == 'pt-BR':
-            self.occurrences.add(OccurrenceInterface(self.rec, 0, lang, 2))
-        elif lang == 'PT-BR':
-            self.occurrences.add(OccurrenceInterface(self.rec, 0, lang, 2))
-        else:
-            self.occurrences.add(OccurrenceInterface(self.rec, 1, lang, 2))
+        if html:
+            lang = html.get('lang')
+
+            if lang:
+                if lang.lower() == 'pt-br':
+                    self.occurrences.add(OccurrenceInterface(self.rec, 0, html, 2))
+                else:
+                    self.occurrences.add(OccurrenceInterface(self.rec, 1, html, 2))
 
         return self.occurrences.list_of_occurrences
