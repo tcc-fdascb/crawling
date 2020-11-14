@@ -34,14 +34,14 @@ def calculate_ia(errors, warnings, successes):
     """
     Cálcula o Índice de Acessibilidade
 
-    fórmula: (p * ((e + a) / V) * ((e / a) / V) * w) / 6
-        p - quantidade de páginas
-        ea - total de erros e alertas
-        V - total de verificações realizadas
-        e - total de erros
-        a - total de alertas
-        w - peso
-        6 - proporção de pesos
+    fórmula: (p * ((ea / V) * (e / a * V) * w) / P
+        p - Quantidade de páginas
+        ea - Total de erros e alertas
+        V - Total de verificações realizadas
+        e - Total de erros
+        a - Total de alertas
+        w - Peso
+        P - Somatória dos pesos
 
     :param errors: list<int>
     :param warnings: list<int>
